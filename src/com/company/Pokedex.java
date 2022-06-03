@@ -3,11 +3,13 @@ package com.company;
 import java.awt.FlowLayout;
 import java.awt.image.BufferedImage;
 import java.net.URL;
+import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-public class Pokedex {
+public class Pokedex implements IAbm <Pokedex>{
+
         public void pokedex(){
 
         }
@@ -16,20 +18,27 @@ public class Pokedex {
 
         }
 
-        public void agregar(){
-
-        }
-
-        public void borrar(){
-
-        }
-
         public void transferir(){
 
         }
 
+        @Override
+        public void agregar(Pokedex elemento) {
 
-        /*public void mostrar(String url) throws Exception{
+        }
+
+        @Override
+        public Pokedex borrar(Pokedex elemento) {
+                return null;
+        }
+
+        @Override
+        public void modificar(Pokedex elemento) {
+
+        }
+
+
+        /* public void mostrar(String url) throws Exception{
             BufferedImage img = ImageIO.read(new URL(url));
             ImageIcon icon = new ImageIcon(img);
             JFrame frame = new JFrame();
