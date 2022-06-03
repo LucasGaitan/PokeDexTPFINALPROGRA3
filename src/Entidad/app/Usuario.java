@@ -75,6 +75,13 @@ public class Usuario {
                 '}';
     }
 
+    public String toStringUser() {
+        return "Usuario{" +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'';
+    }
+
+
     @Override
     public boolean equals(Object o) {
         boolean esIgual = false;
