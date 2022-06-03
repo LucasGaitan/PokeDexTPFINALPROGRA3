@@ -1,6 +1,7 @@
 package com.Entidad;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Pokemon {
     private int id;
@@ -19,6 +20,18 @@ public class Pokemon {
 
     public Pokemon(){
 
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public ArrayList<String> getAbilities() {
+        return abilities;
+    }
+
+    public ArrayList<String> getType() {
+        return type;
     }
 
     public void setId(int id) {
@@ -46,5 +59,25 @@ public class Pokemon {
                 ", type=" + type +
                 ", abilities=" + abilities +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        boolean esIgual = false;
+        if (o!=null) {
+            if (o instanceof Pokemon){
+                Pokemon otro = new Pokemon();
+                if (getId() == ((Pokemon) o).getId()){
+                    esIgual = true;
+                }
+            }
+        }
+
+        return esIgual;
+    }
+
+    @Override
+    public int hashCode() {
+        return 1;
     }
 }

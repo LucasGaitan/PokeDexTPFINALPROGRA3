@@ -3,6 +3,7 @@ package com.Controladores;
 import com.Entidad.Usuario;
 import com.Interfaces.IAbm;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class ControladoraUsuario implements IAbm<Usuario> {
@@ -21,5 +22,9 @@ public class ControladoraUsuario implements IAbm<Usuario> {
     @Override
     public void modificar(Usuario elemento) {
 
+    }
+
+    public HashSet<Usuario> listar(){
+        return null;
     }
 }
