@@ -1,8 +1,11 @@
-package com.company;
+package com.Controladores;
+
+import com.Entidad.Usuario;
+import com.Interfaces.IAbm;
 
 import java.util.HashSet;
 
-public class ControladoraUsuario implements IAbm<Usuario>{
+public class ControladoraUsuario implements IAbm<Usuario> {
     HashSet <Usuario> usuarios = new HashSet<Usuario>();
 
     @Override

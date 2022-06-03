@@ -1,4 +1,4 @@
-package com.company;
+package com.JSON;
 
 import org.json.JSONArray;
 

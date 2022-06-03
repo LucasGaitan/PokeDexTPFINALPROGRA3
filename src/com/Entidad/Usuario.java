@@ -1,4 +1,6 @@
-package com.company;
+package com.Entidad;
+
+import com.company.Pokedex;
 
 public class Usuario {
     private int id;

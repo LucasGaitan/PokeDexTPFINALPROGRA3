@@ -1,5 +1,7 @@
-package com.company;
+package com.Controladores;
 
+import com.Entidad.Pokemon;
+import com.JSON.JsonUtiles;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

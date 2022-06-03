@@ -1,5 +1,7 @@
 package com.company;
 
+
+import com.Interfaces.IAbm;
 import java.awt.FlowLayout;
 import java.awt.image.BufferedImage;
 import java.net.URL;
@@ -8,7 +10,9 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-public class Pokedex implements IAbm <Pokedex>{
+
+
+public class Pokedex implements IAbm<Pokedex> {
 
         public void pokedex(){
 
