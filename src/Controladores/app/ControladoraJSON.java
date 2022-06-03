@@ -1,12 +1,13 @@
-package Controladores.app;
+package com.Controladores;
 
-import Entidad.app.Pokemon;
-import JSON.app.JsonUtiles;
+import com.Entidad.Pokemon;
+import com.JSON.JsonUtiles;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 
 public class ControladoraJSON {

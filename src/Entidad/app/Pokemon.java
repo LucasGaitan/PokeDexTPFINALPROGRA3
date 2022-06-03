@@ -1,6 +1,7 @@
 package Entidad.app;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Pokemon {
     private int id;

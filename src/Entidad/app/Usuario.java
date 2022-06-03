@@ -3,6 +3,8 @@ package Entidad.app;
 
 import company.app.Pokedex;
 
+import java.util.Objects;
+
 public class Usuario {
     private int id;
     private String userName;
