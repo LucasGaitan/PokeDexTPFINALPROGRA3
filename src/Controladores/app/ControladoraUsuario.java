@@ -1,7 +1,7 @@
-package com.Controladores;
+package Controladores.app;
 
-import com.Entidad.Usuario;
-import com.Interfaces.IAbm;
+import Entidad.app.Usuario;
+import Interfaces.app.IAbm;
 
 import java.util.HashSet;
 
@@ -21,5 +21,9 @@ public class ControladoraUsuario implements IAbm<Usuario> {
     @Override
     public void modificar(Usuario elemento) {
 
+    }
+
+    public HashSet<Usuario> listar(){
+        return null;
     }
 }

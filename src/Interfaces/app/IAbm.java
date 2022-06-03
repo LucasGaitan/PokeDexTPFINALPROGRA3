@@ -1,4 +1,4 @@
-package com.Interfaces;
+package Interfaces.app;
 
 public interface IAbm <T>{
     void agregar(T elemento);

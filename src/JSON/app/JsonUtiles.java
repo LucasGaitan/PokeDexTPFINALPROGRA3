@@ -1,4 +1,4 @@
-package com.JSON;
+package JSON.app;
 
 import org.json.JSONArray;
 

@@ -1,15 +1,7 @@
-package com.company;
+package company.app;
 
 
-import com.Interfaces.IAbm;
-import java.awt.FlowLayout;
-import java.awt.image.BufferedImage;
-import java.net.URL;
-import java.util.HashMap;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import Interfaces.app.IAbm;
 
 
 public class Pokedex implements IAbm<Pokedex> {
