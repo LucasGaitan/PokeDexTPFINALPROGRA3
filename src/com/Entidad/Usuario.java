@@ -2,6 +2,8 @@ package com.Entidad;
 
 import com.company.Pokedex;
 
+import java.util.Objects;
+
 public class Usuario {
     private int id;
     private String userName;
@@ -15,6 +17,10 @@ public class Usuario {
         this.password = password;
         this.admin = admin;
         this.pokedex = pokedex;
+    }
+
+    public Usuario() {
+
     }
 
     public int getId() {
@@ -66,5 +72,25 @@ public class Usuario {
                 ", admin=" + admin +
                 ", pokedex=" + pokedex +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        boolean esIgual = false;
+        if (o!=null) {
+            if (o instanceof Usuario){
+                Usuario otro = new Usuario();
+                if (getId() == ((Usuario) o).getId()){
+                    esIgual = true;
+                }
+            }
+        }
+
+        return esIgual;
+    }
+
+    @Override
+    public int hashCode() {
+        return 1;
     }
 }
