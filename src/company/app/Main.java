@@ -1,7 +1,4 @@
 package company.app;
-
-
-
 import Controladores.app.ControladoraJSON;
 import Entidad.app.Pokemon;
 import javafx.application.Application;
