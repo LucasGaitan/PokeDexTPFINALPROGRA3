@@ -1,12 +1,14 @@
 package Controladores.app;
 
 import Entidad.app.Usuario;
+import Exception.app.EUsuarioNotFound;
+import Exception.app.EUsuarioPassIncorrecta;
 import Interfaces.app.IAbm;
 
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class ControladoraUsuario extends Exception implements IAbm<Usuario> {
+public class ControladoraUsuario implements IAbm<Usuario> {
     HashSet <Usuario> usuarios = new HashSet<Usuario>();
 
     @Override
@@ -58,10 +60,25 @@ public class ControladoraUsuario extends Exception implements IAbm<Usuario> {
         return stringBuilder;
     }
 
-    public Usuario login(String username, String password)throws Exception{
+    public Usuario login(String username, String password) throws EUsuarioPassIncorrecta, EUsuarioNotFound {
         Usuario encontrado = encontrarUsuario(username);
-
-        return null; //Falta hacer
+        int cantidadIntentos = 0;
+        if (encontrado!=null){
+            if (encontrado.getUserName().equals(username)){
+                if (encontrado.getPassword().equals(password)){
+                    return encontrado;
+                }
+                else {
+                    cantidadIntentos++;
+                    throw new EUsuarioPassIncorrecta("", cantidadIntentos);
+                }
+            }
+            else {
+                cantidadIntentos++;
+                throw new EUsuarioPassIncorrecta("",cantidadIntentos);
+            }
+        }
+        throw new EUsuarioNotFound("");
     }
 
     String borrarUsuarioLista (Usuario u) //testear
