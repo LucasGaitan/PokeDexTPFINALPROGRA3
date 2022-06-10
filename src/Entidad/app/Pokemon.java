@@ -10,7 +10,7 @@ public class Pokemon {
     private ArrayList <String> type;
     private ArrayList<String> abilities;
 
-    public Pokemon(int id, String name, String sprite, ArrayList<String> type, ArrayList<String> abilities) {
+    public Pokemon (int id, String name, String sprite, ArrayList<String> type, ArrayList<String> abilities) {
         this.id = id;
         this.name = name;
         this.sprite = sprite;
@@ -56,15 +56,21 @@ public class Pokemon {
         return id;
     }
 
-    public void cargarTipos(Pokemon p, String tipo1)
+    public void cargarTipos(String tipo)
     {
-        p.type.add(tipo1);
+
+        this.type.add(tipo);
     }
 
     public void cargarTipos(Pokemon p, String tipo1, String tipo2)
     {
         p.type.add(tipo1);
         p.type.add(tipo2);
+    }
+
+    public void cargarHabilidades(Pokemon p, String habilidad)
+    {
+        p.type.add(habilidad);
     }
 
     public void cargarHabilidades(Pokemon p, String habilidad1, String habilidad2, String habilidad3, String habilidad4)
