@@ -10,7 +10,7 @@ public class Pokemon {
     private ArrayList <String> type;
     private ArrayList<String> abilities;
 
-    public Pokemon(int id, String name, String sprite, ArrayList<String> type, ArrayList<String> abilities) {
+    public Pokemon (int id, String name, String sprite, ArrayList<String> type, ArrayList<String> abilities) {
         this.id = id;
         this.name = name;
         this.sprite = sprite;
@@ -48,6 +48,37 @@ public class Pokemon {
 
     public String getSprite() {
         return sprite;
+    }
+
+    public int generarId()
+    {
+        int id=1;
+        return id;
+    }
+
+    public void cargarTipos(String tipo)
+    {
+
+        this.type.add(tipo);
+    }
+
+    public void cargarTipos(Pokemon p, String tipo1, String tipo2)
+    {
+        p.type.add(tipo1);
+        p.type.add(tipo2);
+    }
+
+    public void cargarHabilidades(Pokemon p, String habilidad)
+    {
+        p.type.add(habilidad);
+    }
+
+    public void cargarHabilidades(Pokemon p, String habilidad1, String habilidad2, String habilidad3, String habilidad4)
+    {
+        p.type.add(habilidad1);
+        p.type.add(habilidad2);
+        p.type.add(habilidad3);
+        p.type.add(habilidad4);
     }
 
     @Override
