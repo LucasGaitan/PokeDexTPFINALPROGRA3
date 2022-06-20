@@ -107,7 +107,7 @@ public class ControladoraUsuario implements IAbm<Usuario> {
         }
         return response;
     }
-
+/*
     public List <String> listarUsuarios () //test
     {
         List<String> lista=new ArrayList<String>();
@@ -118,5 +118,8 @@ public class ControladoraUsuario implements IAbm<Usuario> {
         }
         return lista;
     }
+    */
+
+
 
 }
