@@ -26,6 +26,10 @@ public class Pokemon {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public ArrayList<String> getAbilities() {
         return abilities;
     }

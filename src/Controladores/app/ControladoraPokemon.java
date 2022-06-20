@@ -14,6 +14,24 @@ public class ControladoraPokemon implements IAbm<Pokemon> {
         return nuevo;
     }
 
+    public Pokemon buscarPokemon(String nombre)
+    {
+        Pokemon aux= new Pokemon();
+            for(Pokemon p: listaDePokemon)
+            {
+                if(p.getName().equals(nombre))
+                {
+                    aux=p;
+                }
+            }
+        return aux;
+    }
+
+    public String mostrarPokemon(Pokemon pokemon)
+    {
+        return pokemon.toString();
+    }
+
     public StringBuilder listarPokemon()
     {
         StringBuilder builder= new StringBuilder();
@@ -27,16 +45,35 @@ public class ControladoraPokemon implements IAbm<Pokemon> {
 
     @Override
     public void agregar(Pokemon elemento) {
-
+        listaDePokemon.add(elemento);
     }
 
     @Override
     public Pokemon borrar(Pokemon elemento) {
-        return null;
+        Pokemon aux= new Pokemon();
+        for(Pokemon p: listaDePokemon)
+        {
+            if(p.equals(elemento))
+            {
+                aux=p;
+            }
+        }
+        listaDePokemon.remove(aux);
+        return aux;
     }
 
     @Override
     public void modificar(Pokemon elemento) {
-
+        Pokemon aux= new Pokemon();
+        int index=0;
+        for(Pokemon p: listaDePokemon)
+        {
+            if(p.equals(elemento))
+            {
+                aux=p;
+                index= listaDePokemon.indexOf(p);
+            }
+        }
+        listaDePokemon.set(index, elemento);
     }
 }
