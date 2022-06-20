@@ -5,8 +5,10 @@ import Exception.app.EUsuarioNotFound;
 import Exception.app.EUsuarioPassIncorrecta;
 import Interfaces.app.IAbm;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 
 public class ControladoraUsuario implements IAbm<Usuario> {
     HashSet <Usuario> usuarios = new HashSet<Usuario>();
@@ -51,14 +53,14 @@ public class ControladoraUsuario implements IAbm<Usuario> {
         return encontrarUsuario(username).toStringUser();
     }
 
-    public StringBuilder listarUsuarios (){
+    /*public StringBuilder listarUsuarios (){
         Iterator<Usuario> iterator = usuarios.iterator();
         StringBuilder stringBuilder = new StringBuilder();
         while (iterator.hasNext()){
             stringBuilder.append(iterator.next());
         }
         return stringBuilder;
-    }
+    }*/
 
     public Usuario login(String username, String password) throws EUsuarioPassIncorrecta, EUsuarioNotFound {
         Usuario encontrado = encontrarUsuario(username);
@@ -107,8 +109,8 @@ public class ControladoraUsuario implements IAbm<Usuario> {
         }
         return response;
     }
-/*
-    public List <String> listarUsuarios () //test
+
+    public List<String> listarUsuarios () //test
     {
         List<String> lista=new ArrayList<String>();
         for (Usuario u:usuarios)
@@ -118,8 +120,5 @@ public class ControladoraUsuario implements IAbm<Usuario> {
         }
         return lista;
     }
-    */
-
-
 
 }
