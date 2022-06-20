@@ -23,17 +23,12 @@ public class EUsuarioPassIncorrecta extends Exception{
 
     private int cantidadIntentos;
 
-    public EUsuarioPassIncorrecta (String msg, int cantidadIntentos) {
+    public EUsuarioPassIncorrecta (String msg) {
         super(msg);
-        this.cantidadIntentos = cantidadIntentos;
-    }
-
-    public int getCantidadIntentos() {
-        return cantidadIntentos;
     }
 
     @Override
     public String getMessage() {
-        return super.getMessage() + "Usuario o contraseña incorrecta, le quedan "+ this.cantidadIntentos;
+        return super.getMessage() + "Usuario o contraseña incorrecta";
     }
 }

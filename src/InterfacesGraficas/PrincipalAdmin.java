@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class PrincipalAdminController implements Initializable{
+public class PrincipalAdmin implements Initializable{
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -24,7 +24,7 @@ public class PrincipalAdminController implements Initializable{
     }
     public void administracion (ActionEvent event) throws IOException
     {
-        Parent root = FXMLLoader.load(getClass().getResource("PrincipalAdmin.fxml"));
+        root = FXMLLoader.load(getClass().getResource("PrincipalAdmin.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);

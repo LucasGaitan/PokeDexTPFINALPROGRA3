@@ -62,25 +62,22 @@ public class ControladoraUsuario implements IAbm<Usuario> {
         return stringBuilder;
     }*/
 
-    public Usuario login(String username, String password) throws EUsuarioPassIncorrecta, EUsuarioNotFound {
+    public Usuario login(String username, String password) throws EUsuarioPassIncorrecta{
         Usuario encontrado = encontrarUsuario(username);
-        int cantidadIntentos = 0;
         if (encontrado!=null){
             if (encontrado.getUserName().equals(username)){
                 if (encontrado.getPassword().equals(password)){
                     return encontrado;
                 }
                 else {
-                    cantidadIntentos++;
-                    throw new EUsuarioPassIncorrecta("", cantidadIntentos);
+                    throw new EUsuarioPassIncorrecta("");
                 }
             }
             else {
-                cantidadIntentos++;
-                throw new EUsuarioPassIncorrecta("",cantidadIntentos);
+                throw new EUsuarioPassIncorrecta("");
             }
         }
-        throw new EUsuarioNotFound("");
+        throw new EUsuarioPassIncorrecta("");
     }
 
     String borrarUsuarioLista (Usuario u) //testear
