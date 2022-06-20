@@ -1,4 +1,8 @@
 package InterfacesGraficas;
+import Controladores.app.ControladoraUsuario;
+import Entidad.app.Usuario;
+import Exception.app.EUsuarioNotFound;
+import Exception.app.EUsuarioPassIncorrecta;
 import company.app.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,22 +34,18 @@ public class LogIn {
 
     public void userLogIn(ActionEvent event) throws IOException {
         checkLogin();
-
     }
 
     private void checkLogin() throws IOException {
         Main m = new Main();
-        if(username.getText().toString().equals("prueba") && password.getText().toString().equals("123")) {
-            wrongLogIn.setText("pokimon");
-        }
-
-        else if(username.getText().isEmpty() && password.getText().isEmpty()) {
-            wrongLogIn.setText("Por favor, ingrese sus datos");
-        }
-
-
-        else {
+        ControladoraUsuario controladoraUsuario = new ControladoraUsuario();
+        try {
+            Usuario encontrado = controladoraUsuario.login(this.username.getText(),this.password.getText());
+            m.changeScene("InterfacesGraficas/User.fxml");
+        } catch (EUsuarioPassIncorrecta e) {
             wrongLogIn.setText("Usuario o contraseña incorrectos!");
+        } catch (EUsuarioNotFound e) {
+            wrongLogIn.setText("Por favor, ingrese sus datos");
         }
     }
 
