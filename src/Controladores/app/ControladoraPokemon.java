@@ -2,6 +2,7 @@ package Controladores.app;
 
 
 import Entidad.app.Pokemon;
+import Exception.app.NotFoundException;
 import Interfaces.app.IAbm;
 import java.util.ArrayList;
 
