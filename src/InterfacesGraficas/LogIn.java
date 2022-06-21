@@ -74,10 +74,11 @@ public class LogIn {
 
     public void userLogIn(ActionEvent event) throws IOException {
         Usuario encontrado = checkLogin();
-        //encontrado.setUserName("Lucas");
-        this.encontrado= encontrado;
+        encontrado.setUserName("Lucas");
+        encontrado.setAdmin(true);
+        this.encontrado = encontrado;
         if (encontrado.isAdmin()) {
-
+            openPrincipalAdmin();
         } else {
             openPrincipalUser();
         }
@@ -93,6 +94,11 @@ public class LogIn {
             encontrado = checkLogin();
         }
         return encontrado;
+    }
+
+    public void openPrincipalAdmin() {
+        PrincipalAdmin principalAdmin = new PrincipalAdmin(this);
+        principalAdmin.showStage();
     }
 
     public Usuario getEncontrado() {

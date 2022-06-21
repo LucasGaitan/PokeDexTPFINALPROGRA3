@@ -13,21 +13,33 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class PrincipalAdmin implements Initializable{
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-    private AnchorPane anchorPane1;
-    @Override
+public class PrincipalAdmin{
+    private final Stage thisStage;
+
+    public PrincipalAdmin(LogIn logIn){
+
+        thisStage = logIn.getThisStage();
+        //this.logIn = logIn;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("InterfacesGraficas/PrincipalAdmin.fxml"));
+
+            loader.setController(this);
+
+            thisStage.setScene(new Scene(loader.load()));
+
+            thisStage.setTitle("Administracion");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showStage() {
+        thisStage.show();
+    }
+
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
-    public void administracion (ActionEvent event) throws IOException
-    {
-        root = FXMLLoader.load(getClass().getResource("PrincipalAdmin.fxml"));
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+
 }

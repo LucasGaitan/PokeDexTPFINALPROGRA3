@@ -16,10 +16,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class ListarUsuarios implements Initializable {
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
+public class ListarUsuarios {
+    @FXML
+    public void initialize() {
+    cargarTabla();
     }
 
     @FXML
@@ -43,13 +43,13 @@ public class ListarUsuarios implements Initializable {
         Usuario u2 = new Usuario(2, "user2", "asd", false, new Pokedex());
         mockList.add(u1);
         mockList.add(u2);
-/*
+
         for (Usuario u:mockList)
         {
-            IdColumn.setCellValueFactory(new PropertyValueFactory<>(u1.getId()));
+            IdColumn.setCellValueFactory(new PropertyValueFactory<String, Usuario>(Integer.toString(u1.getId())));
         }
 
- */
+
         table.getColumns().addAll(IdColumn, UsernameColumn, PasswordColumn, AdminColumn, NpokemonIdColumn);
     }
 
