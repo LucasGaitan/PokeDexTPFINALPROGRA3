@@ -14,16 +14,29 @@ public class ControladoraPokemon implements IAbm<Pokemon> {
         return nuevo;
     }
 
+    public Pokemon buscarPokemonEnLista(String nombre) throws NotFoundException
+    {
+        Pokemon aux = new Pokemon();
+        for (Pokemon p : listaDePokemon) {
+            if (p.getName().equals(nombre)) {
+                aux = p;
+            }
+        }
+        if(aux.getName()==null)
+        {
+            throw new NotFoundException("Pokemon no encontrado");
+        }
+        return aux;
+    }
+
     public Pokemon buscarPokemon(String nombre)
     {
         Pokemon aux= new Pokemon();
-            for(Pokemon p: listaDePokemon)
-            {
-                if(p.getName().equals(nombre))
-                {
-                    aux=p;
-                }
-            }
+        try {
+            aux=buscarPokemonEnLista(nombre);
+        }catch (NotFoundException e){
+            e.printStackTrace();
+        }
         return aux;
     }
 
