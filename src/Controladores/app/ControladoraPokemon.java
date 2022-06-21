@@ -2,6 +2,7 @@ package Controladores.app;
 
 
 import Entidad.app.Pokemon;
+import Exception.app.NotFoundException;
 import Interfaces.app.IAbm;
 import java.util.ArrayList;
 
@@ -13,6 +14,37 @@ public class ControladoraPokemon implements IAbm<Pokemon> {
     {
         Pokemon nuevo= new Pokemon(id, name, sprite, type, abilities);
         return nuevo;
+    }
+
+    public Pokemon buscarPokemonEnLista(String nombre) throws NotFoundException
+    {
+        Pokemon aux = new Pokemon();
+        for (Pokemon p : listaDePokemon) {
+            if (p.getName().equals(nombre)) {
+                aux = p;
+            }
+        }
+        if(aux.getName()==null)
+        {
+            throw new NotFoundException("Pokemon no encontrado");
+        }
+        return aux;
+    }
+
+    public Pokemon buscarPokemon(String nombre)
+    {
+        Pokemon aux= new Pokemon();
+        try {
+            aux=buscarPokemonEnLista(nombre);
+        }catch (NotFoundException e){
+            e.printStackTrace();
+        }
+        return aux;
+    }
+
+    public String mostrarPokemon(Pokemon pokemon)
+    {
+        return pokemon.toString();
     }
 
     public StringBuilder listarPokemon()
@@ -28,16 +60,35 @@ public class ControladoraPokemon implements IAbm<Pokemon> {
 
     @Override
     public void agregar(Pokemon elemento) {
-
+        listaDePokemon.add(elemento);
     }
 
     @Override
     public Pokemon borrar(Pokemon elemento) {
-        return null;
+        Pokemon aux= new Pokemon();
+        for(Pokemon p: listaDePokemon)
+        {
+            if(p.equals(elemento))
+            {
+                aux=p;
+            }
+        }
+        listaDePokemon.remove(aux);
+        return aux;
     }
 
     @Override
     public void modificar(Pokemon elemento) {
-
+        Pokemon aux= new Pokemon();
+        int index=0;
+        for(Pokemon p: listaDePokemon)
+        {
+            if(p.equals(elemento))
+            {
+                aux=p;
+                index= listaDePokemon.indexOf(p);
+            }
+        }
+        listaDePokemon.set(index, elemento);
     }
 }
