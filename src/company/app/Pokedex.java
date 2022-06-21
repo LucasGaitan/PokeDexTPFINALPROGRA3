@@ -1,37 +1,24 @@
 package company.app;
 
+public class Pokedex {
 
-import Interfaces.app.IAbm;
+    public void pokedex() {
 
+    }
 
-public class Pokedex implements IAbm<Pokedex> {
+    public void listar() {
 
-        public void pokedex(){
+    }
 
-        }
+    public void transferir() {
 
-        public void listar(){
+    }
 
-        }
+    public Pokedex borrar(Pokedex elemento) {
+        return null;
+    }
 
-        public void transferir(){
-
-        }
-
-        @Override
-        public void agregar(Pokedex elemento) {
-
-        }
-
-        @Override
-        public Pokedex borrar(Pokedex elemento) {
-                return null;
-        }
-
-        @Override
-        public void modificar(Pokedex elemento) {
-
-        }
+}
 
 
         /* public void mostrar(String url) throws Exception{
@@ -46,4 +33,6 @@ public class Pokedex implements IAbm<Pokedex> {
             frame.setVisible(true);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }*/
-}
+
+
+

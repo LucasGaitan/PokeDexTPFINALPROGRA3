@@ -1,13 +1,12 @@
 package InterfacesGraficas;
-import javafx.event.ActionEvent;
+import Aplicacion.app.Aplicacion;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,10 +14,14 @@ import java.util.ResourceBundle;
 
 public class PrincipalAdmin{
     private final Stage thisStage;
+    private Aplicacion aplicacion;
+    @FXML
+    private Button btnListar;
 
-    public PrincipalAdmin(LogIn logIn){
+    public PrincipalAdmin(Inicio inicio, Aplicacion aplicacion){
 
-        thisStage = logIn.getThisStage();
+        thisStage = inicio.getThisStage();
+        this.aplicacion=aplicacion;
         //this.logIn = logIn;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("InterfacesGraficas/PrincipalAdmin.fxml"));
@@ -38,8 +41,16 @@ public class PrincipalAdmin{
         thisStage.show();
     }
 
-    public void initialize(URL url, ResourceBundle resourceBundle) {
 
+    @FXML
+    public void initialize() {
+        ListarUsuarios listarUsuarios=new ListarUsuarios(this, aplicacion);
+        btnListar.setOnAction(event -> listarUsuarios.showStage());
+    }
+
+
+    public Stage getThisStage() {
+        return thisStage;
     }
 
 }

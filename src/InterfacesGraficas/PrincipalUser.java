@@ -12,15 +12,15 @@ import java.io.IOException;
 public class PrincipalUser{
 
     private final Stage thisStage;
-    private final LogIn logIn;
+    private final Inicio inicio;
 
     @FXML
     private Label usuario;
 
-    public PrincipalUser(LogIn logIn){
+    public PrincipalUser(Inicio inicio){
 
-        thisStage = logIn.getThisStage();
-        this.logIn = logIn;
+        thisStage = inicio.getThisStage();
+        this.inicio = inicio;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("InterfacesGraficas/PrincipalUser.fxml"));
 
@@ -41,7 +41,7 @@ public class PrincipalUser{
 
     @FXML
     private void initialize(){
-        usuario.setText(logIn.getEncontrado().getUserName());
+        usuario.setText(inicio.getEncontrado().getUserName());
     }
 
 }

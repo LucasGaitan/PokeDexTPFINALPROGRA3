@@ -26,9 +26,4 @@ public class EUsuarioPassIncorrecta extends Exception{
     public EUsuarioPassIncorrecta (String msg) {
         super(msg);
     }
-
-    @Override
-    public String getMessage() {
-        return super.getMessage() + "Usuario o contraseña incorrecta";
-    }
 }

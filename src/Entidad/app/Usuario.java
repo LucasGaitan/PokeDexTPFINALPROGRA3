@@ -88,7 +88,7 @@ public class Usuario {
         if (o!=null) {
             if (o instanceof Usuario){
                 Usuario otro = new Usuario();
-                if (getId() == ((Usuario) o).getId()){
+                if (getUserName() == ((Usuario) o).getUserName()){
                     esIgual = true;
                 }
             }

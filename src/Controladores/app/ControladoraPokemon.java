@@ -2,7 +2,7 @@ package Controladores.app;
 
 
 import Entidad.app.Pokemon;
-import Exception.app.NotFoundException;
+import Exception.app.ENotFoundException;
 import Interfaces.app.IAbm;
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ public class ControladoraPokemon implements IAbm<Pokemon> {
         return nuevo;
     }
 
-    public Pokemon buscarPokemonEnLista(String nombre) throws NotFoundException
+    public Pokemon buscarPokemonEnLista(String nombre) throws ENotFoundException
     {
         Pokemon aux = new Pokemon();
         for (Pokemon p : listaDePokemon) {
@@ -26,7 +26,7 @@ public class ControladoraPokemon implements IAbm<Pokemon> {
         }
         if(aux.getName()==null)
         {
-            throw new NotFoundException("Pokemon no encontrado");
+            throw new ENotFoundException("Pokemon no encontrado");
         }
         return aux;
     }
@@ -36,7 +36,7 @@ public class ControladoraPokemon implements IAbm<Pokemon> {
         Pokemon aux= new Pokemon();
         try {
             aux=buscarPokemonEnLista(nombre);
-        }catch (NotFoundException e){
+        }catch (ENotFoundException e){
             e.printStackTrace();
         }
         return aux;
