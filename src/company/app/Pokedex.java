@@ -1,38 +1,34 @@
 package company.app;
 
 
-import Interfaces.app.IAbm;
+import Entidad.app.Pokemon;
+
+import java.util.ArrayList;
 
 
-public class Pokedex implements IAbm<Pokedex> {
+public class Pokedex{
+    ArrayList<Pokemon> pokedex;
 
-        public void pokedex(){
+    public ArrayList<Pokemon> listar(){
+        return pokedex;
+    }
 
+    public void agregar(Pokemon elemento) {
+        pokedex.add(elemento);
+    }
+
+    public Pokemon borrar(Pokemon elemento) {
+        Pokemon aux= new Pokemon();
+        for(Pokemon p: pokedex)
+        {
+            if(p.equals(elemento))
+            {
+                aux=p;
+            }
         }
-
-        public void listar(){
-
-        }
-
-        public void transferir(){
-
-        }
-
-        @Override
-        public void agregar(Pokedex elemento) {
-
-        }
-
-        @Override
-        public Pokedex borrar(Pokedex elemento) {
-                return null;
-        }
-
-        @Override
-        public void modificar(Pokedex elemento) {
-
-        }
-
+        pokedex.remove(aux);
+        return aux;
+    }
 
         /* public void mostrar(String url) throws Exception{
             BufferedImage img = ImageIO.read(new URL(url));
