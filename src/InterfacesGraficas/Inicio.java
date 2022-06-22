@@ -36,8 +36,8 @@ public class Inicio {
     Aplicacion aplicacion;
 
 
-    public Inicio(Aplicacion aplicacion) {
-        thisStage = new Stage();
+    public Inicio(Aplicacion aplicacion, Stage stage) {
+        thisStage = stage;
         this.aplicacion=aplicacion;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("InterfacesGraficas/Inicio.fxml"));
@@ -55,18 +55,15 @@ public class Inicio {
         }
     }
 
+
     public void showStage() {
         thisStage.show();
     }
 
     @FXML
     private void initialize() {
-        button.setOnAction(event -> {
-            userLogIn(event);
-        });
-        button2.setOnAction(event -> {
-            userSignUp(event);
-        });
+        button.setOnAction(this::userLogIn);
+        button2.setOnAction(this::userSignUp);
 
     }
 
@@ -120,7 +117,7 @@ public class Inicio {
     }
 
     private void openPrincipalUser() {
-        PrincipalUser principalUser = new PrincipalUser(this);
+        PrincipalUser principalUser = new PrincipalUser(this, aplicacion);
         principalUser.showStage();
     }
 

@@ -34,7 +34,7 @@
     <center>
         <AnchorPane prefHeight="281.0" prefWidth="248.0" style="-fx-background-color: #3D84B1;" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="71.0" layoutY="285.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Log Out" />
+            <Button fx:id="logOut" layoutX="71.0" layoutY="285.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Log Out" />
             <ImageView fitHeight="213.0" fitWidth="319.0" layoutX="31.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/pngwing.com%20(2).png" />

@@ -1,14 +1,16 @@
 package company.app;
 
-public class Pokedex {
-
 import Entidad.app.Pokemon;
 
 import java.util.ArrayList;
 
 
 public class Pokedex{
-    ArrayList<Pokemon> pokedex;
+    private ArrayList<Pokemon> pokedex;
+
+    public void pokedex() {
+
+    }
 
     public ArrayList<Pokemon> listar(){
         return pokedex;
@@ -20,8 +22,7 @@ public class Pokedex{
 
     public Pokemon borrar(Pokemon elemento) {
         Pokemon aux= new Pokemon();
-        for(Pokemon p: pokedex)
-        {
+        for(Pokemon p: pokedex) {
             if(p.equals(elemento))
             {
                 aux=p;
@@ -31,20 +32,9 @@ public class Pokedex{
         return aux;
     }
 
-    public void pokedex() {
-
-    }
-
-    public void listar() {
-
-    }
 
     public void transferir() {
 
-    }
-
-    public Pokedex borrar(Pokedex elemento) {
-        return null;
     }
 
 }

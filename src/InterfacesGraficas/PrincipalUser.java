@@ -1,8 +1,10 @@
 package InterfacesGraficas;
 
+import Aplicacion.app.Aplicacion;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -13,12 +15,16 @@ public class PrincipalUser{
 
     private final Stage thisStage;
     private final Inicio inicio;
-
+    Aplicacion aplicacion;
     @FXML
     private Label usuario;
 
-    public PrincipalUser(Inicio inicio){
+    @FXML
+    private Button logOut;
 
+
+    public PrincipalUser(Inicio inicio, Aplicacion aplicacion){
+        this.aplicacion = aplicacion;
         thisStage = inicio.getThisStage();
         this.inicio = inicio;
         try {
@@ -39,9 +45,15 @@ public class PrincipalUser{
         thisStage.show();
     }
 
+    public void userLogOut(){
+        Inicio logOut = new Inicio(aplicacion, thisStage);
+        logOut.showStage();
+    }
+
     @FXML
     private void initialize(){
         usuario.setText(inicio.getEncontrado().getUserName());
+        logOut.setOnAction(event -> userLogOut());
     }
 
 }
