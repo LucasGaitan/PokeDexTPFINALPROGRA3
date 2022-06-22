@@ -1,21 +1,37 @@
 package Controladores.app;
 
 import Entidad.app.Usuario;
-import Exception.app.EUsuarioNotFound;
+import Exception.app.EDatosVacios;
+import Exception.app.ENotFoundException;
+import Exception.app.EUsuarioExiste;
 import Exception.app.EUsuarioPassIncorrecta;
 import Interfaces.app.IAbm;
+import company.app.Pokedex;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class ControladoraUsuario implements IAbm<Usuario> {
-    HashSet <Usuario> usuarios = new HashSet<Usuario>();
+    HashMap <String,Usuario> usuarios = new HashMap<String, Usuario>();
+    private int idUsuarios = 0;
+    public void testUsuario ()
+    {
+        Usuario user=new Usuario(1, "admin", "admin",true,new Pokedex());
+        usuarios.put(user.getUserName(), user);
+    }
 
     @Override
-    public void agregar(Usuario elemento) {
-        usuarios.add(elemento);
+    public void agregar(Usuario elemento ) throws EUsuarioExiste, EDatosVacios {
+        if(elemento.getUserName().equals("") || elemento.getPassword().equals("")){
+            throw new EDatosVacios("Por favor, ingrese sus datos");
+        }
+        else if (usuarios.containsKey(elemento.getUserName())){
+            throw new EUsuarioExiste("El usuario ya existe en el sistema");
+        }
+        else {
+            usuarios.put(elemento.getUserName(),elemento);
+        }
+
+
     }
 
     @Override
@@ -29,27 +45,27 @@ public class ControladoraUsuario implements IAbm<Usuario> {
 
     }
 
-    public Usuario encontrarUsuario (String username)  {
+    public Usuario encontrarUsuario(String username) {
 
-        Iterator<Usuario> iterator = usuarios.iterator();
+        Iterator<Map.Entry<String, Usuario>> iterator = usuarios.entrySet().iterator();
         boolean flag = false;
         Usuario encontrado = null;
 
-        while (iterator.hasNext() && !flag){
-            if ((iterator.next().getUserName().equals(username))){
+        while (iterator.hasNext() && !flag) {
+            Map.Entry<String, Usuario> entradaMapa = iterator.next();
+            if ((entradaMapa.getKey().equals(username))) {
                 flag = true;
-                encontrado = (Usuario) iterator.next();
+                encontrado = entradaMapa.getValue();
             }
-            iterator.next();
         }
         return encontrado;
     }
 
-    public String mostrarInfoUsuarioAdmin(String username){
+    public String mostrarInfoUsuarioAdmin(String username) {
         return encontrarUsuario(username).toString();
     }
 
-    public String mostrarInfoUsuarioUser(String username){
+    public String mostrarInfoUsuarioUser(String username) {
         return encontrarUsuario(username).toStringUser();
     }
 
@@ -62,8 +78,19 @@ public class ControladoraUsuario implements IAbm<Usuario> {
         return stringBuilder;
     }*/
 
-    public Usuario login(String username, String password) throws EUsuarioPassIncorrecta{
+    public Usuario login(String username, String password) throws EUsuarioPassIncorrecta {
         Usuario encontrado = encontrarUsuario(username);
+        if (encontrado != null){
+            if (!encontrado.getUserName().equals(username) && !encontrado.getPassword().equals(password)) {
+                throw new EUsuarioPassIncorrecta("Usuario o contraseña incorrecta");
+            }
+        }
+        else {
+            throw new EUsuarioPassIncorrecta("Usuario o contraseña incorrecta");
+        }
+
+        return encontrado;
+        /*
         if (encontrado!=null){
             if (encontrado.getUserName().equals(username)){
                 if (encontrado.getPassword().equals(password)){
@@ -78,44 +105,52 @@ public class ControladoraUsuario implements IAbm<Usuario> {
             }
         }
         throw new EUsuarioPassIncorrecta("");
+
+         */
+
     }
 
-    String borrarUsuarioLista (Usuario u) //testear
+    String borrarUsuarioLista(Usuario elemento) throws ENotFoundException
     {
-        boolean found=false;
-        Iterator i=usuarios.iterator();
-        Usuario aBorrar=new Usuario();
-        String response=new String();
-        while (i.hasNext() && !found)
-        {
-            if ((Usuario)i.next()==u)
-            {
-                aBorrar=(Usuario)i.next();
-                found=true;
+        boolean found = false;
+        Iterator<Map.Entry<String, Usuario>> iterator = usuarios.entrySet().iterator();
+        Usuario aBorrar = new Usuario();
+        String response = new String();
+        while (iterator.hasNext() && !found) {
+            Map.Entry<String, Usuario> entradaMapa = iterator.next();
+            if (entradaMapa.getKey().equals(elemento.getUserName())) {
+                aBorrar = entradaMapa.getValue();
+                found = true;
             }
         }
-        if (usuarios.contains(aBorrar))
-        {
-            response=u.getUserName();
-            usuarios.remove(aBorrar);
+        if (usuarios.containsKey(aBorrar.getUserName())) {
+            usuarios.remove(aBorrar.getUserName());
 
-        }
-        else
-        {
-            ///throw usuarionotfoundexception
+        } else {
+            throw new ENotFoundException("El usuario no existe");
         }
         return response;
     }
 
-    public List<String> listarUsuarios () //test
+    /*public List<String> listarUsuarios() // HACER
     {
-        List<String> lista=new ArrayList<String>();
-        for (Usuario u:usuarios)
-        {
-            Usuario usuario=new Usuario();
-            usuario.setUserName(u.getUserName());
+        List<Usuario> lista = new ArrayList<Usuario>();
+        Iterator<Map.Entry<String, Usuario>> iterator = usuarios.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, Usuario> entradaMapa = iterator.next();
+            lista.add()
         }
         return lista;
-    }
+    }*/
 
+
+
+    public Usuario crearUsuario(String username, String password){
+        Usuario usuario = new Usuario(getCurrentId()+1, username, password, false, null);
+        return usuario;
+    }
+    private int getCurrentId ()
+    {
+        return usuarios.size();
+    }
 }

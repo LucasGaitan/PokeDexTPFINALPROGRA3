@@ -1,15 +1,20 @@
 
 package InterfacesGraficas;
 
+import Aplicacion.app.Aplicacion;
 import Controladores.app.ControladoraUsuario;
 import Entidad.app.Usuario;
 import company.app.Pokedex;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,19 +28,44 @@ public class ListarUsuarios {
     }
 
     @FXML
-    private TableView table = new TableView();
+    private TableView table;
     @FXML
-    private TableColumn IdColumn = new TableColumn();
+    private TableColumn IdColumn;
     @FXML
-    private TableColumn UsernameColumn = new TableColumn();
+    private TableColumn UsernameColumn;
     @FXML
-    private TableColumn PasswordColumn = new TableColumn();
+    private TableColumn PasswordColumn;
     @FXML
-    private TableColumn AdminColumn = new TableColumn();
+    private TableColumn AdminColumn;
     @FXML
-    private TableColumn NpokemonIdColumn = new TableColumn();
+    private TableColumn NpokemonIdColumn;
 
+    private Stage thisStage;
+    private Aplicacion aplicacion;
+    public ListarUsuarios(PrincipalAdmin principalAdmin, Aplicacion aplicacion){
 
+        thisStage = principalAdmin.getThisStage();
+        this.aplicacion=aplicacion;
+        //this.logIn = logIn;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("InterfacesGraficas/ListarUsuarios.fxml"));
+
+            loader.setController(this);
+
+            thisStage.setScene(new Scene(loader.load()));
+
+            thisStage.setTitle("Administracion");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showStage() {
+        thisStage.show();
+    }
+
+    @FXML
     public void cargarTabla() {
         ControladoraUsuario controller = new ControladoraUsuario();
         ArrayList<Usuario> mockList = new ArrayList<Usuario>();

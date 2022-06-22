@@ -1,17 +1,8 @@
 package company.app;
-import Controladores.app.ControladoraJSON;
-import Controladores.app.ControladoraUsuario;
-import Entidad.app.Pokemon;
-import InterfacesGraficas.LogIn;
-import InterfacesGraficas.PrincipalUser;
+import Aplicacion.app.Aplicacion;
+import InterfacesGraficas.Inicio;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.util.LinkedHashSet;
 
 public class Main extends Application {
 
@@ -25,10 +16,10 @@ public class Main extends Application {
         primaryStage.setTitle("Pokedex");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();*/
+        Aplicacion aplicacion = new Aplicacion();
+        Inicio inicio = new Inicio(aplicacion);
 
-        LogIn logIn = new LogIn();
-
-        logIn.showStage();
+        inicio.showStage();
 
     }
 

@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Random;
 
-public class ControladoraArchivoUsuarios {
+public class ControladoraArchivoUsuarios{
 
     public void agregar(String archivo, Usuario elemento) {
         try {

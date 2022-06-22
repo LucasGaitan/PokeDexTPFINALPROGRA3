@@ -42,7 +42,8 @@
             </Label>
             <TextField fx:id="username" layoutX="146.0" layoutY="158.0" promptText="Usuario" />
             <PasswordField fx:id="password" layoutX="146.0" layoutY="214.0" promptText="Contraseña" />
-            <Button fx:id="button" layoutX="130.0" layoutY="298.0" mnemonicParsing="false" onAction="#userLogIn" prefHeight="33.0" prefWidth="74.0" style="-fx-background-color: #ffc900;" text="Log In" />
+            <Button fx:id="button" layoutX="85.0" layoutY="302.0" mnemonicParsing="false" onAction="#userLogIn" prefHeight="33.0" prefWidth="74.0" style="-fx-background-color: #ffc900;" text="Log In" />
+            <Button fx:id="button2" layoutX="195.0" layoutY="302.0" mnemonicParsing="false" onAction="#userLogIn" prefHeight="33.0" prefWidth="74.0" style="-fx-background-color: #ffc900;" text="Sign Up" />
             <Label fx:id="wrongLogIn" layoutX="31.0" layoutY="259.0" prefHeight="25.0" prefWidth="267.0" textFill="RED">
                <font>
                   <Font size="16.0" />
