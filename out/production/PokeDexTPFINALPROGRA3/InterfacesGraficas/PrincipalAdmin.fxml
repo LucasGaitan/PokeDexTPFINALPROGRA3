@@ -5,6 +5,6 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="btnListar" layoutX="161.0" layoutY="88.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="296.0" text="Listar Usuarios" />
+      <Button fx:id="btnListar" layoutX="161.0" layoutY="88.0" mnemonicParsing="false" onAction="#btnListarUsuarios" prefHeight="25.0" prefWidth="296.0" text="Listar Usuarios" />
    </children>
 </AnchorPane>

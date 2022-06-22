@@ -112,7 +112,7 @@ public class Inicio {
     }
 
     public void openPrincipalAdmin() {
-        PrincipalAdmin principalAdmin = new PrincipalAdmin(this, aplicacion);
+        PrincipalAdmin principalAdmin = new PrincipalAdmin(this);
         principalAdmin.showStage();
     }
 

@@ -1,5 +1,6 @@
 package InterfacesGraficas;
 import Aplicacion.app.Aplicacion;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,10 +19,10 @@ public class PrincipalAdmin{
     @FXML
     private Button btnListar;
 
-    public PrincipalAdmin(Inicio inicio, Aplicacion aplicacion){
+    public PrincipalAdmin(Inicio inicio){
 
         thisStage = inicio.getThisStage();
-        this.aplicacion=aplicacion;
+        this.aplicacion=inicio.aplicacion;
         //this.logIn = logIn;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("InterfacesGraficas/PrincipalAdmin.fxml"));
@@ -44,10 +45,21 @@ public class PrincipalAdmin{
 
     @FXML
     public void initialize() {
-        ListarUsuarios listarUsuarios=new ListarUsuarios(this, aplicacion);
+    btnListar.setOnAction(this::btnListarUsuarios);
+    }
+    public void openListarUsuarios ()
+    {
+        ListarUsuarios listarUsuarios=new ListarUsuarios(this);
         btnListar.setOnAction(event -> listarUsuarios.showStage());
     }
-
+    public void btnListarUsuarios (ActionEvent event)
+    {
+        openListarUsuarios();
+    }
+    public Aplicacion getAplicacion ()
+    {
+        return this.aplicacion;
+    }
 
     public Stage getThisStage() {
         return thisStage;
