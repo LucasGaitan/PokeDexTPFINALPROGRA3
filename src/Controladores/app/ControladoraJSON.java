@@ -1,6 +1,7 @@
 package Controladores.app;
 
 import Entidad.app.Pokemon;
+import Entidad.app.Usuario;
 import JSON.app.JsonUtiles;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,4 +41,43 @@ public class ControladoraJSON {
         }
         return arrayPokemon;
     }
+
+    public JSONArray generarUsuarioJSON(Usuario usuario)
+    {
+        JSONObject usuarioJSON= new JSONObject();
+        try {
+            usuarioJSON.put("id", usuario.getId());
+            usuarioJSON.put("userName", usuario.getUserName());
+            usuarioJSON.put("password", usuario.getPassword());
+            usuarioJSON.put("admin", usuario.isAdmin());
+            JSONArray pokedexUsuarioJSON= new JSONArray();
+            for(Pokemon p: usuario.getPokedex().listar())
+            {
+                JSONObject pokemonUsuarioJSON= new JSONObject();
+                pokemonUsuarioJSON.put("id", p.getId());
+                pokemonUsuarioJSON.put("name", p.getName());
+                pokemonUsuarioJSON.put("sprite", p.getSprite());
+                JSONArray typesJSON= new JSONArray();
+                for(String s: p.getType())
+                {
+                    typesJSON.put(s);
+                }
+                pokemonUsuarioJSON.put("type", typesJSON);
+                JSONArray abilitiesJSON= new JSONArray();
+                for(String s: p.getAbilities())
+                {
+                    abilitiesJSON.put(s);
+                }
+                pokemonUsuarioJSON.put("abilities", abilitiesJSON);
+                pokedexUsuarioJSON.put(pokemonUsuarioJSON);
+            }
+            usuarioJSON.put("pokedex", pokedexUsuarioJSON);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JSONArray arrayUsuarioJSON= new JSONArray();
+        arrayUsuarioJSON.put(usuarioJSON);
+        return arrayUsuarioJSON;
+    }
+
 }
