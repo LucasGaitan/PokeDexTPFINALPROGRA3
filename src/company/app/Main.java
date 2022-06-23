@@ -7,20 +7,20 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private static Stage stg;
+    private static Aplicacion aplicacion;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        /*stg = primaryStage;
-        primaryStage.setResizable(false);
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("InterfacesGraficas/Inicio.fxml"));
-        primaryStage.setTitle("Pokedex");
-        primaryStage.setScene(new Scene(root, 600, 400));
-        primaryStage.show();*/
-        Aplicacion aplicacion = new Aplicacion();
+        aplicacion = new Aplicacion();
+        aplicacion.iniciarPrograma();
         Inicio inicio = new Inicio(aplicacion, new Stage());
-
         inicio.showStage();
+    }
 
+    @Override
+    public void stop() throws Exception {
+        aplicacion.getControladoraArchivoUsuarios().agregarUsuariosToFile("Usuarios.bin", aplicacion.getControladoraUsuario().getHashMapUsuarios());
+        super.stop();
     }
 
     public static void main(String[] args) {

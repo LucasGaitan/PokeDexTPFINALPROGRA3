@@ -8,41 +8,48 @@ import Exception.app.EUsuarioPassIncorrecta;
 import Interfaces.app.IAbm;
 import Entidad.app.Pokedex;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class ControladoraUsuario implements IAbm<Usuario> {
-    HashMap <String,Usuario> usuarios = new HashMap<String, Usuario>();
-    private int idUsuarios = 0;
-    public void testUsuario ()
-    {
-        Usuario user=new Usuario(1, "admin", "admin",true,new Pokedex());
+    HashMap<String, Usuario> usuarios;
+
+    public ControladoraUsuario(HashMap<String, Usuario> usuarioHashMap) {
+        this.usuarios = usuarioHashMap;
+    }
+
+    public void testUsuario() {
+        Usuario user = new Usuario(1, "admin", "admin", true, new Pokedex());
         usuarios.put(user.getUserName(), user);
     }
 
     @Override
-    public void agregar(Usuario elemento ) throws EUsuarioExiste, EDatosVacios {
-        if(elemento.getUserName().equals("") || elemento.getPassword().equals("")){
+    public void agregar(Usuario elemento) throws EUsuarioExiste, EDatosVacios {
+        if (elemento.getUserName().equals("") || elemento.getPassword().equals("")) {
             throw new EDatosVacios("Por favor, ingrese sus datos");
-        }
-        else if (usuarios.containsKey(elemento.getUserName())){
+        } else if (usuarios.containsKey(elemento.getUserName())) {
             throw new EUsuarioExiste("El usuario ya existe en el sistema");
-        }
-        else {
-            usuarios.put(elemento.getUserName(),elemento);
+        } else {
+            usuarios.put(elemento.getUserName(), elemento);
         }
 
 
+    }
+
+    public void setUsuarios(HashMap<String, Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
     @Override
     public Usuario borrar(Usuario elemento) {
 
-        return null;
+        usuarios.remove(elemento.getUserName());
+        return elemento;
     }
 
     @Override
     public void modificar(Usuario elemento) {
-
+        usuarios.replace(elemento.getUserName(), elemento);
     }
 
     public Usuario encontrarUsuario(String username) {
@@ -69,49 +76,20 @@ public class ControladoraUsuario implements IAbm<Usuario> {
         return encontrarUsuario(username).toStringUser();
     }
 
-    /*public StringBuilder listarUsuarios (){
-        Iterator<Usuario> iterator = usuarios.iterator();
-        StringBuilder stringBuilder = new StringBuilder();
-        while (iterator.hasNext()){
-            stringBuilder.append(iterator.next());
-        }
-        return stringBuilder;
-    }*/
-
     public Usuario login(String username, String password) throws EUsuarioPassIncorrecta {
         Usuario encontrado = encontrarUsuario(username);
-        if (encontrado != null){
+        if (encontrado != null) {
             if (!encontrado.getUserName().equals(username) || !encontrado.getPassword().equals(password)) {
                 throw new EUsuarioPassIncorrecta("Usuario o contraseña incorrecta");
             }
-        }
-        else {
+        } else {
             throw new EUsuarioPassIncorrecta("Usuario o contraseña incorrecta");
         }
 
         return encontrado;
-        /*
-        if (encontrado!=null){
-            if (encontrado.getUserName().equals(username)){
-                if (encontrado.getPassword().equals(password)){
-                    return encontrado;
-                }
-                else {
-                    throw new EUsuarioPassIncorrecta("");
-                }
-            }
-            else {
-                throw new EUsuarioPassIncorrecta("");
-            }
-        }
-        throw new EUsuarioPassIncorrecta("");
-
-         */
-
     }
 
-    String borrarUsuarioLista(Usuario elemento) throws ENotFoundException
-    {
+    String borrarUsuarioLista(Usuario elemento) throws ENotFoundException {
         boolean found = false;
         Iterator<Map.Entry<String, Usuario>> iterator = usuarios.entrySet().iterator();
         Usuario aBorrar = new Usuario();
@@ -132,27 +110,27 @@ public class ControladoraUsuario implements IAbm<Usuario> {
         return response;
     }
 
-    /*public List<String> listarUsuarios() // HACER
-    {
-        List<Usuario> lista = new ArrayList<Usuario>();
-        Iterator<Map.Entry<String, Usuario>> iterator = usuarios.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<String, Usuario> entradaMapa = iterator.next();
-            lista.add()
-        }
-        return lista;
-    }*/
-
-
-
-    public Usuario crearUsuario(String username, String password){
-        Usuario usuario = new Usuario(getCurrentId()+1, username, password, false, new Pokedex());
+    public Usuario crearUsuario(String username, String password) {
+        Usuario usuario = new Usuario(getCurrentId() + 1, username, password, false, new Pokedex());
         return usuario;
     }
-    private int getCurrentId ()
-    {
+
+    private int getCurrentId() {
         return usuarios.size();
     }
 
+    public HashMap<String, Usuario> getHashMapUsuarios() {
+        return this.usuarios;
+    }
+
+    public ArrayList<Usuario> castHashMapToArrayList(HashMap<String, Usuario> usuarioHashMap) {
+        ArrayList<Usuario> lista = new ArrayList<>();
+        Iterator<Map.Entry<String, Usuario>> iterator = usuarios.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, Usuario> entradaMapa = iterator.next();
+            lista.add(entradaMapa.getValue());
+        }
+        return lista;
+    }
 
 }

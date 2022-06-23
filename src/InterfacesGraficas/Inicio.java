@@ -22,6 +22,7 @@ public class Inicio {
 
     private final Stage thisStage;
     private Usuario encontrado;
+    private Aplicacion aplicacion;
     @FXML
     private Button button;
     @FXML
@@ -33,7 +34,7 @@ public class Inicio {
     @FXML
     private PasswordField password;
 
-    Aplicacion aplicacion;
+
 
 
     public Inicio(Aplicacion aplicacion, Stage stage) {

@@ -26,7 +26,7 @@ public class PrincipalUser{
     private Button verPokedex;
 
     @FXML
-    private Button abPokemon;
+    private Button altaListPokemon;
 
     public PrincipalUser(Inicio inicio){
         this.aplicacion = inicio.getAplicacion();
@@ -61,8 +61,8 @@ public class PrincipalUser{
     }
 
     public void openABPokemon() {
-        ABPokemon abPokemon = new ABPokemon(inicio);
-        abPokemon.showStage();
+        AltaListPokemon altaListPokemon = new AltaListPokemon(inicio);
+        altaListPokemon.showStage();
     }
 
     @FXML
@@ -70,7 +70,7 @@ public class PrincipalUser{
         usuario.setText(inicio.getEncontrado().getUserName());
         logOut.setOnAction(event -> userLogOut());
         verPokedex.setOnAction(event -> openVerPokedex());
-        abPokemon.setOnAction(event -> openABPokemon());
+        altaListPokemon.setOnAction(event -> openABPokemon());
     }
 
 }

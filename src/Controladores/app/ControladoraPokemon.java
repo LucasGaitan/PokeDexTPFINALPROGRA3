@@ -2,14 +2,23 @@ package Controladores.app;
 
 
 import Entidad.app.Pokemon;
+import Entidad.app.Usuario;
 import Exception.app.ENotFoundException;
 import Interfaces.app.IAbm;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 
 public class ControladoraPokemon implements IAbm<Pokemon> {
-    HashSet<Pokemon> listaDePokemon;
+    private LinkedHashSet<Pokemon> listaDePokemon;
+    private HashMap<String, Usuario> usuarios;
+
+    public ControladoraPokemon (LinkedHashSet <Pokemon> listaDePokemon)
+    {
+        this.listaDePokemon=listaDePokemon;
+    }
 
     public Pokemon crearPokemon(int id, String name, String sprite, ArrayList<String> type, ArrayList<String> abilities)
     {
@@ -75,4 +84,6 @@ public class ControladoraPokemon implements IAbm<Pokemon> {
             }
         }
     }
+
+
 }

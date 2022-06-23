@@ -2,9 +2,6 @@ package InterfacesGraficas;
 
 import Aplicacion.app.Aplicacion;
 import Entidad.app.Pokemon;
-import Entidad.app.Usuario;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,16 +14,14 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.StringJoiner;
 
-public class VerPokedex {
+public class AltaListPokemon {
 
     private final Stage thisStage;
     private  Inicio inicio;
-    private ArrayList<Pokemon> pokemons;
-    private Aplicacion aplicacion;
     private Pokemon seleccionado;
+    Aplicacion aplicacion;
 
     @FXML
     private Label usuario;
@@ -50,21 +45,20 @@ public class VerPokedex {
     private Button atras;
 
     @FXML
-    private Button borrarPokemon;
+    private Button capturarPokemon;
 
-    public VerPokedex(Inicio inicio) {
+    public AltaListPokemon(Inicio inicio){
         this.aplicacion = inicio.getAplicacion();
         thisStage = inicio.getThisStage();
         this.inicio = inicio;
-        this.pokemons = new ArrayList<>();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("InterfacesGraficas/VerPokedex.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("InterfacesGraficas/AltaListPokemon.fxml"));
 
             loader.setController(this);
 
             thisStage.setScene(new Scene(loader.load()));
 
-            thisStage.setTitle("Pokedex");
+            thisStage.setTitle("Agregar | Borrar Pokemon a Pokedex");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -75,48 +69,39 @@ public class VerPokedex {
         thisStage.show();
     }
 
-    public void irAtras() {
+    public void irAtras(){
         PrincipalUser principalUser = new PrincipalUser(inicio);
         principalUser.showStage();
     }
 
     @FXML
-    private void initialize() {
+    private void initialize(){
         usuario.setText(inicio.getEncontrado().getUserName());
         atras.setOnAction(event -> irAtras());
+        capturarPokemon.setOnAction(event -> altaPokemon());
         cargarLista();
         listPokemon.setOnMouseClicked(mouseEvent -> seleccionListView());
-        borrarPokemon.setOnAction(event -> {borrarPokemon();
-        cargarLista();});
     }
-
     public void cargarLista(){
-        pokemons = inicio.getEncontrado().getPokedex().listar();
-        ArrayList <String> lista=new ArrayList<>();
-        for (Pokemon p : pokemons) {
-            lista.add(p.getName());
-            //listPokemon.getItems().add(p.getName());
-        }
-        ObservableList<String> observableList = FXCollections.observableArrayList(lista);
-        listPokemon.setItems(observableList);
 
+        for (Pokemon p : aplicacion.getListaDePokemon()) {
+            listPokemon.getItems().add(p.getName());
+        }
 
     }
     public void seleccionListView() {
         String nombre = listPokemon.getSelectionModel().getSelectedItem();
-        Pokemon seleccionado=new Pokemon();
-        for (Pokemon p : pokemons){
+        //buscarlo desde pokedex
+        Pokemon seleccionado = new Pokemon();
+        for (Pokemon p : aplicacion.getListaDePokemon()){
             if (p.getName().equals(nombre)){
                 seleccionado=p;
             }
         }
-        if (nombre!=null && !pokemons.isEmpty() )
-        {
-            this.seleccionado = seleccionado;
-            setPokedexUi();
-        }
+        this.seleccionado = seleccionado;
+        setPokemonUi();
     }
-    public void setPokedexUi ()
+    public void setPokemonUi ()
     {
         Image image = new Image(seleccionado.getSprite(), 1000, 1000, true, true);
         urlPokemon.setImage(image);
@@ -136,9 +121,9 @@ public class VerPokedex {
         habilidadPokemon.setText(habilidades.toString());
     }
 
-    public void borrarPokemon(){
-        inicio.getEncontrado().getPokedex().borrar(seleccionado);
-        cargarLista();
+    public void altaPokemon (){
+        inicio.getEncontrado().getPokedex().agregar(seleccionado);
     }
+
 }
 

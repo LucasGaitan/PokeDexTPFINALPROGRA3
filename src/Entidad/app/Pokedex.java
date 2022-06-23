@@ -2,10 +2,11 @@ package Entidad.app;
 
 import Entidad.app.Pokemon;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Pokedex{
+public class Pokedex implements Serializable {
     private ArrayList<Pokemon> pokedex;
 
     public Pokedex() {
@@ -30,6 +31,10 @@ public class Pokedex{
 
     public ArrayList<Pokemon> listar() {
         return pokedex;
+    }
+    public void limpiarPokedex ()
+    {
+        this.pokedex.clear();
     }
 }
 

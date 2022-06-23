@@ -1,11 +1,14 @@
 package Entidad.app;
 
+import javafx.fxml.Initializable;
+
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
-public class Pokemon {
+public class Pokemon implements Serializable {
     private int id;
     private String name;
     private String sprite;
