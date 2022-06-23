@@ -25,9 +25,8 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Button layoutX="14.0" layoutY="199.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="210.0" text="Agregar / Eliminar Pokémon" />
-            <Button fx:id="verPokedex" layoutX="14.0" layoutY="121.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="210.0" text="Ver Pokedex" />
-            <Button layoutX="14.0" layoutY="285.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="210.0" text="Ver datos de Usuario" />
+            <Button fx:id="abPokemon" layoutX="14.0" layoutY="212.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="210.0" text="Agregar / Eliminar Pokémon" />
+            <Button fx:id="verPokedex" layoutX="14.0" layoutY="113.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="210.0" text="Ver Pokedex" />
          </children>
         </AnchorPane>
     </left>

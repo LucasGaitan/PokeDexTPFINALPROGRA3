@@ -25,6 +25,9 @@ public class PrincipalUser{
     @FXML
     private Button verPokedex;
 
+    @FXML
+    private Button abPokemon;
+
     public PrincipalUser(Inicio inicio){
         this.aplicacion = inicio.getAplicacion();
         thisStage = inicio.getThisStage();
@@ -57,11 +60,17 @@ public class PrincipalUser{
         verPokedex.showStage();
     }
 
+    public void openABPokemon() {
+        ABPokemon abPokemon = new ABPokemon(inicio);
+        abPokemon.showStage();
+    }
+
     @FXML
     private void initialize(){
         usuario.setText(inicio.getEncontrado().getUserName());
         logOut.setOnAction(event -> userLogOut());
         verPokedex.setOnAction(event -> openVerPokedex());
+        abPokemon.setOnAction(event -> openABPokemon());
     }
 
 }

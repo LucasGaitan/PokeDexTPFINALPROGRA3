@@ -7,6 +7,7 @@ import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,12 +22,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class VerPokedex{
+public class VerPokedex {
 
     private final Stage thisStage;
     private final Inicio inicio;
+    private ArrayList<Pokemon> pokemons;
     Aplicacion aplicacion;
+
+    @FXML
+    private Label usuario;
+
     @FXML
     private ImageView urlPokemon;
 
@@ -34,12 +41,22 @@ public class VerPokedex{
     private ListView<String> listPokemon;
 
     @FXML
-    private Label nombrePokemon;
+    private Label tipoPokemon;
 
-    public VerPokedex(Inicio inicio){
+    @FXML
+    private Label idPokemon;
+
+    @FXML
+    private Label habilidadPokemon;
+
+    @FXML
+    private Button atras;
+
+    public VerPokedex(Inicio inicio) {
         this.aplicacion = inicio.getAplicacion();
         thisStage = inicio.getThisStage();
         this.inicio = inicio;
+        this.pokemons = new ArrayList<>();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("InterfacesGraficas/VerPokedex.fxml"));
 
@@ -58,40 +75,52 @@ public class VerPokedex{
         thisStage.show();
     }
 
+    public void irAtras() {
+        PrincipalUser principalUser = new PrincipalUser(inicio);
+        principalUser.showStage();
+    }
 
     @FXML
-    private void initialize(){
-        inicio.getEncontrado().getPokedex().agregar(new Pokemon(1,"pingo","https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",new ArrayList<>(),new ArrayList<>()));
-        inicio.getEncontrado().getPokedex().agregar(new Pokemon(2,"pingo2","https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",new ArrayList<>(),new ArrayList<>()));
-        ArrayList<Pokemon> pokemons = inicio.getEncontrado().getPokedex().listar();
-        for(Pokemon p: pokemons)
-        {
+    private void initialize() {
+        usuario.setText(inicio.getEncontrado().getUserName());
+        atras.setOnAction(event -> irAtras());
+        listPokemon.setOnMouseClicked(mouseEvent -> seleccionListView());
+        String seleccionado = new String();
+        inicio.getEncontrado().getPokedex().agregar(new Pokemon(1, "bulbasaur", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png", new ArrayList<>(), new ArrayList<>()));
+        inicio.getEncontrado().getPokedex().agregar(new Pokemon(2, "ivysaur", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png", new ArrayList<>(), new ArrayList<>()));
+        pokemons = inicio.getEncontrado().getPokedex().listar();
+        for (Pokemon p : pokemons) {
             listPokemon.getItems().add(p.getName());
         }
+    }
 
-        Image image = new Image(inicio.getEncontrado().getPokedex().listar().get(1).getSprite(), 1000, 1000, true, true);
+    public void seleccionListView() {
+        String nombre = listPokemon.getSelectionModel().getSelectedItem();
+        //buscarlo desde pokedex
+        Pokemon encontrado=new Pokemon();
+        for (Pokemon p : pokemons){
+            if (p.getName().equals(nombre)){
+                encontrado=p;
+            }
+        }
+        setPokedexUi(encontrado);
+    }
+    public void setPokedexUi (Pokemon pokemon)
+    {
+        Image image = new Image(pokemon.getSprite(), 1000, 1000, true, true);
         urlPokemon.setImage(image);
         urlPokemon.setPreserveRatio(true);
-        nombrePokemon.setOnMouseClicked(this::AccionBoton);
-        /*ObservableList<String> pokemons2 = FXCollections.observableArrayList(
-                for (pokemons : )
-        );
+        idPokemon.setText(String.valueOf(pokemon.getId()));
+        
+    }
 
 
-        for (int i = 0; i < pokemons2.size(); i++) {
-            pokemons2.add(pokemons.get(i).getName());
-            listPokemon.getItems().setAll();
-        }
-        */
+    public void AccionBoton(String seleccionado) {
+        seleccionado = (String) listPokemon.getSelectionModel().getSelectedItem();
+        //nombrePokemon.setText(seleccionado);
 
     }
 
-    public String AccionBoton (MouseEvent event) ///eliminar
-    {
-    String seleccionado=(String)listPokemon.getSelectionModel().getSelectedItem();
-    return seleccionado;
-
-    }
 
 }
 
