@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.StringJoiner;
 
 public class VerPokedex {
 
@@ -76,6 +77,7 @@ public class VerPokedex {
     }
 
     public void irAtras() {
+        pokemons.clear();
         PrincipalUser principalUser = new PrincipalUser(inicio);
         principalUser.showStage();
     }
@@ -85,9 +87,15 @@ public class VerPokedex {
         usuario.setText(inicio.getEncontrado().getUserName());
         atras.setOnAction(event -> irAtras());
         listPokemon.setOnMouseClicked(mouseEvent -> seleccionListView());
-        String seleccionado = new String();
-        inicio.getEncontrado().getPokedex().agregar(new Pokemon(1, "bulbasaur", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png", new ArrayList<>(), new ArrayList<>()));
-        inicio.getEncontrado().getPokedex().agregar(new Pokemon(2, "ivysaur", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png", new ArrayList<>(), new ArrayList<>()));
+        ArrayList<String> tipos = new ArrayList<>();
+        tipos.add("fuego");
+        tipos.add("veneno");
+        ArrayList<String> habilidades = new ArrayList<>();
+        habilidades.add("piña");
+        habilidades.add("pum");
+
+        inicio.getEncontrado().getPokedex().agregar(new Pokemon(1, "bulbasaur", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png", tipos, habilidades));
+        inicio.getEncontrado().getPokedex().agregar(new Pokemon(2, "ivysaur", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png", tipos, habilidades));
         pokemons = inicio.getEncontrado().getPokedex().listar();
         for (Pokemon p : pokemons) {
             listPokemon.getItems().add(p.getName());
@@ -111,7 +119,18 @@ public class VerPokedex {
         urlPokemon.setImage(image);
         urlPokemon.setPreserveRatio(true);
         idPokemon.setText(String.valueOf(pokemon.getId()));
-        
+
+        StringJoiner tipos = new StringJoiner("/");
+        for (String recorrer : pokemon.getType()){
+            tipos.add(recorrer);
+        }
+        tipoPokemon.setText(tipos.toString());
+
+        StringJoiner habilidades = new StringJoiner("/");
+        for (String recorrer : pokemon.getAbilities()){
+            habilidades.add(recorrer);
+        }
+        habilidadPokemon.setText(habilidades.toString());
     }
 
 

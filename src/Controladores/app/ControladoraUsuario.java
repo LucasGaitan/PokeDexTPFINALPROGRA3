@@ -81,7 +81,7 @@ public class ControladoraUsuario implements IAbm<Usuario> {
     public Usuario login(String username, String password) throws EUsuarioPassIncorrecta {
         Usuario encontrado = encontrarUsuario(username);
         if (encontrado != null){
-            if (!encontrado.getUserName().equals(username) && !encontrado.getPassword().equals(password)) {
+            if (!encontrado.getUserName().equals(username) || !encontrado.getPassword().equals(password)) {
                 throw new EUsuarioPassIncorrecta("Usuario o contraseña incorrecta");
             }
         }
