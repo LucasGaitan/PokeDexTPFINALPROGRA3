@@ -3,13 +3,12 @@ package InterfacesGraficas;
 
 import Aplicacion.app.Aplicacion;
 import Controladores.app.ControladoraUsuario;
+import Entidad.app.Pokedex;
 import Entidad.app.Usuario;
-import company.app.Pokedex;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;

@@ -117,7 +117,7 @@ public class Inicio {
     }
 
     private void openPrincipalUser() {
-        PrincipalUser principalUser = new PrincipalUser(this, aplicacion);
+        PrincipalUser principalUser = new PrincipalUser(this);
         principalUser.showStage();
     }
 
@@ -127,5 +127,9 @@ public class Inicio {
 
     public Stage getThisStage() {
         return thisStage;
+    }
+
+    public Aplicacion getAplicacion() {
+        return aplicacion;
     }
 }

@@ -6,7 +6,7 @@ import Exception.app.ENotFoundException;
 import Exception.app.EUsuarioExiste;
 import Exception.app.EUsuarioPassIncorrecta;
 import Interfaces.app.IAbm;
-import company.app.Pokedex;
+import Entidad.app.Pokedex;
 
 import java.util.*;
 
@@ -146,11 +146,13 @@ public class ControladoraUsuario implements IAbm<Usuario> {
 
 
     public Usuario crearUsuario(String username, String password){
-        Usuario usuario = new Usuario(getCurrentId()+1, username, password, false, null);
+        Usuario usuario = new Usuario(getCurrentId()+1, username, password, false, new Pokedex());
         return usuario;
     }
     private int getCurrentId ()
     {
         return usuarios.size();
     }
+
+
 }

@@ -22,9 +22,11 @@ public class PrincipalUser{
     @FXML
     private Button logOut;
 
+    @FXML
+    private Button verPokedex;
 
-    public PrincipalUser(Inicio inicio, Aplicacion aplicacion){
-        this.aplicacion = aplicacion;
+    public PrincipalUser(Inicio inicio){
+        this.aplicacion = inicio.getAplicacion();
         thisStage = inicio.getThisStage();
         this.inicio = inicio;
         try {
@@ -34,7 +36,7 @@ public class PrincipalUser{
 
             thisStage.setScene(new Scene(loader.load()));
 
-            thisStage.setTitle("Pokedex");
+            thisStage.setTitle("Usuario");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -50,10 +52,16 @@ public class PrincipalUser{
         logOut.showStage();
     }
 
+    public void openVerPokedex() {
+        VerPokedex verPokedex = new VerPokedex(inicio);
+        verPokedex.showStage();
+    }
+
     @FXML
     private void initialize(){
         usuario.setText(inicio.getEncontrado().getUserName());
         logOut.setOnAction(event -> userLogOut());
+        verPokedex.setOnAction(event -> openVerPokedex());
     }
 
 }
