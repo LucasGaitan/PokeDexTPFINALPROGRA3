@@ -13,54 +13,13 @@ import java.util.LinkedHashSet;
 
 public class ControladoraPokemon implements IAbm<Pokemon> {
     private LinkedHashSet<Pokemon> listaDePokemon;
-    private HashMap<String, Usuario> usuarios;
+
 
     public ControladoraPokemon (LinkedHashSet <Pokemon> listaDePokemon)
     {
         this.listaDePokemon=listaDePokemon;
     }
 
-    public Pokemon crearPokemon(int id, String name, String sprite, ArrayList<String> type, ArrayList<String> abilities)
-    {
-        Pokemon nuevo= new Pokemon(id, name, sprite, type, abilities);
-        return nuevo;
-    }
-
-    public Pokemon buscarPokemonEnLista(String nombre) throws ENotFoundException
-    {
-        Pokemon aux = new Pokemon();
-        for (Pokemon p : listaDePokemon) {
-            if (p.getName().equals(nombre)) {
-                aux = p;
-            }
-        }
-        if(aux.getName()==null)
-        {
-            throw new ENotFoundException("Pokemon no encontrado");
-        }
-        return aux;
-    }
-
-    public Pokemon buscarPokemon(String nombre)
-    {
-        Pokemon aux= new Pokemon();
-        try {
-            aux=buscarPokemonEnLista(nombre);
-        }catch (ENotFoundException e){
-            e.printStackTrace();
-        }
-        return aux;
-    }
-
-    public String mostrarPokemon(Pokemon pokemon)
-    {
-        return pokemon.toString();
-    }
-
-    public HashSet<Pokemon> listarPokemon()
-    {
-        return listaDePokemon;
-    }
 
     @Override
     public void agregar(Pokemon elemento) {

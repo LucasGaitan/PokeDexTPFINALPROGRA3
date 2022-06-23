@@ -22,18 +22,15 @@
             </TableView>
          <Button fx:id="logOut" layoutX="452.0" layoutY="310.0" mnemonicParsing="false" text="Log Out" />
          <Button fx:id="agregarUsuario" layoutX="394.0" layoutY="63.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Agregar usuario" />
-         <Button fx:id="modificarUsuario" layoutX="394.0" layoutY="150.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Modificar usuario" />
-         <Button fx:id="eliminarUsuario" layoutX="394.0" layoutY="238.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Eliminar usuario" />
+         <Button fx:id="modificarUsuario" layoutX="394.0" layoutY="114.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Modificar usuario" />
+         <Button fx:id="eliminarUsuario" layoutX="394.0" layoutY="163.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Eliminar usuario" />
          <Label layoutX="390.0" layoutY="4.0" prefHeight="21.0" prefWidth="198.0" text="Administración de usuarios" textFill="WHITE">
             <font>
                <Font name="System Bold Italic" size="14.0" />
             </font>
          </Label>
-         <Label fx:id="errorLabel" layoutX="394.0" layoutY="256.0" prefHeight="51.0" prefWidth="175.0" textAlignment="CENTER" textFill="RED" wrapText="true">
-            <font>
-               <Font size="14.0" />
-            </font>
-         </Label>
+         <Label fx:id="errorLabel" layoutX="394.0" layoutY="258.0" prefHeight="49.0" prefWidth="175.0" textAlignment="CENTER" textFill="RED" wrapText="true" />
+         <Button fx:id="ExportarAJson" layoutX="394.0" layoutY="216.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="175.0" text="Exportar informacion de usuario a json" textAlignment="CENTER" wrapText="true" />
       </AnchorPane>
    </center>
 </BorderPane>

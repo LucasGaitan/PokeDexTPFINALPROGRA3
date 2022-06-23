@@ -12,7 +12,10 @@ import java.util.LinkedHashSet;
 
 public class ControladoraJSON {
     private String fuente;
+    public ControladoraJSON ()
+    {
 
+    }
     public ControladoraJSON (String archivo){
         fuente = JsonUtiles.leer(archivo);
     }

@@ -37,6 +37,8 @@ public class ModificarUsuario {
 
     @FXML
     private Button modificarUsuario;
+    @FXML
+    private Label errorLabel ;
 
     private final Usuario seleccionado;
 
@@ -66,8 +68,7 @@ public class ModificarUsuario {
     @FXML
     public void initialize() {
         atras.setOnAction(event -> irAtras());
-        modificarUsuario.setOnAction(event -> {modificarUsuario(seleccionado);
-        irAtras();});
+        modificarUsuario.setOnAction(event -> modificarUsuario(seleccionado));
         usuario.setText(seleccionado.getUserName());
         cargarDatos(seleccionado);
     }
@@ -87,6 +88,12 @@ public class ModificarUsuario {
     }
 
     public void modificarUsuario(Usuario usuario) {
+        if (passwordM.getText().trim().length()==0)
+        {
+            errorLabel.setText("Se debe ingresar una contraseña");
+        }
+        else
+        {
         usuario.setPassword(passwordM.getText());
         if (adminM.isSelected()) {
             usuario.setAdmin(true);
@@ -101,6 +108,9 @@ public class ModificarUsuario {
         }
         ControladoraUsuario controller=aplicacion.getControladoraUsuario();
         controller.modificar(usuario);
+        PrincipalAdmin principalAdmin=new PrincipalAdmin(inicio);
+        principalAdmin.showStage();
+        }
 
     }
 

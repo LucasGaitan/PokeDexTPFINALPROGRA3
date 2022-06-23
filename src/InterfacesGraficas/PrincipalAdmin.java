@@ -2,8 +2,10 @@
 package InterfacesGraficas;
 
 import Aplicacion.app.Aplicacion;
+import Controladores.app.ControladoraJSON;
 import Controladores.app.ControladoraUsuario;
 import Entidad.app.Usuario;
+import JSON.app.JsonUtiles;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.json.JSONArray;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -59,6 +62,9 @@ public class PrincipalAdmin {
 
     @FXML
     private Label errorLabel;
+
+    @FXML
+    private Button ExportarAJson;
 
     public PrincipalAdmin(Inicio inicio) {
 
@@ -112,6 +118,8 @@ public class PrincipalAdmin {
         logOut.setOnAction(event -> userLogOut());
         modificarUsuario.setOnMouseClicked(event -> openModificarUsuario(getUsuarioSeleccionado()));
         eliminarUsuario.setOnMouseClicked(event -> eliminarUsuario(getUsuarioSeleccionado()));
+        ExportarAJson.setOnMouseClicked(event -> exportarUsuarioAJson());
+        agregarUsuario.setOnMouseClicked(event -> openAgregarUsuario());
     }
 
     public Usuario getUsuarioSeleccionado ()
@@ -144,6 +152,27 @@ public class PrincipalAdmin {
         {
             errorLabel.setText("No se ha seleccionado ningun usuario.");
         }
+    }
+
+
+    public void exportarUsuarioAJson ()
+    {
+        Usuario seleccionado=getUsuarioSeleccionado();
+        if (seleccionado!=null)
+        {
+            ControladoraJSON controladoraJSON=new ControladoraJSON();
+            JSONArray array=controladoraJSON.generarUsuarioJSON(seleccionado);
+            JsonUtiles.grabar(array);
+        }
+        else
+        {
+            errorLabel.setText("No se ha seleccionado ningun usuario.");
+        }
+    }
+    public void openAgregarUsuario ()
+    {
+        AgregarUsuario agregarUsuario=new AgregarUsuario(inicio);
+        agregarUsuario.showStage();
     }
 
 }

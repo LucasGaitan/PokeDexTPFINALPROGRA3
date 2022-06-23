@@ -114,7 +114,11 @@ public class ControladoraUsuario implements IAbm<Usuario> {
         Usuario usuario = new Usuario(getCurrentId() + 1, username, password, false, new Pokedex());
         return usuario;
     }
-
+    public Usuario crearUsuarioAdmin (String username, String password, boolean admin)
+    {
+        Usuario usuario = new Usuario(getCurrentId() + 1, username, password, admin, new Pokedex());
+        return usuario;
+    }
     private int getCurrentId() {
         return usuarios.size();
     }
