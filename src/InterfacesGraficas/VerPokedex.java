@@ -3,6 +3,7 @@ package InterfacesGraficas;
 import Aplicacion.app.Aplicacion;
 import Entidad.app.Pokemon;
 import Entidad.app.Usuario;
+import Interfaces.app.IInterfacesGraficas;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.StringJoiner;
 
-public class VerPokedex extends vistasPokemon{
+public class VerPokedex extends vistasPokemon implements IInterfacesGraficas {
 
     private ArrayList<Pokemon> pokemons;
 

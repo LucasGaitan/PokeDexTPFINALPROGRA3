@@ -7,6 +7,7 @@ import Controladores.app.ControladoraUsuario;
 import Entidad.app.Usuario;
 import Exception.app.EDatosVacios;
 import Exception.app.ENotDeleteAdmin;
+import Interfaces.app.IInterfacesGraficas;
 import JSON.app.JsonUtiles;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class PrincipalAdmin {
+public class PrincipalAdmin implements IInterfacesGraficas {
 
     private Stage thisStage;
 

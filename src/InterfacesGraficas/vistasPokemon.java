@@ -2,6 +2,7 @@ package InterfacesGraficas;
 
 import Aplicacion.app.Aplicacion;
 import Entidad.app.Pokemon;
+import Interfaces.app.IInterfacesGraficas;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

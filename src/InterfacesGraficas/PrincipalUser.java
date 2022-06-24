@@ -1,6 +1,7 @@
 package InterfacesGraficas;
 
 import Aplicacion.app.Aplicacion;
+import Interfaces.app.IInterfacesGraficas;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,7 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class PrincipalUser{
+public class PrincipalUser implements IInterfacesGraficas {
 
     private Stage thisStage;
 
@@ -54,7 +55,7 @@ public class PrincipalUser{
     }
 
     @FXML
-    private void initialize(){ ///inicializo los eventos
+    public void initialize(){ ///inicializo los eventos
         usuario.setText(inicio.getEncontrado().getUserName());
         logOut.setOnAction(event -> userLogOut());
         verPokedex.setOnAction(event -> openVerPokedex());

@@ -5,6 +5,7 @@ import Controladores.app.ControladoraUsuario;
 import Entidad.app.Pokedex;
 import Entidad.app.Usuario;
 import Exception.app.EDatosVacios;
+import Interfaces.app.IInterfacesGraficas;
 import com.sun.source.tree.TryTree;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ModificarUsuario {
+public class ModificarUsuario implements IInterfacesGraficas {
     private Stage thisStage;
 
     private Inicio inicio;

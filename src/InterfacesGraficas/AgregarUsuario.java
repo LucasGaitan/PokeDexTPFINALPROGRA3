@@ -6,6 +6,7 @@ import Controladores.app.ControladoraUsuario;
 import Entidad.app.Usuario;
 import Exception.app.EDatosVacios;
 import Exception.app.EUsuarioExiste;
+import Interfaces.app.IInterfacesGraficas;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,7 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AgregarUsuario {
+public class AgregarUsuario implements IInterfacesGraficas {
     private Aplicacion aplicacion;
 
     private Stage thisStage;
@@ -62,7 +63,7 @@ public class AgregarUsuario {
     }
 
     @FXML
-    private void initialize() {
+    public void initialize() {
         atras.setOnMouseClicked(event -> irAtras());
         CrearUsuario.setOnMouseClicked(event -> agregarUsuario());
     }

@@ -2,6 +2,7 @@ package InterfacesGraficas;
 
 import Aplicacion.app.Aplicacion;
 import Entidad.app.Pokemon;
+import Interfaces.app.IInterfacesGraficas;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,7 +18,7 @@ import java.io.IOException;
 import java.util.LinkedHashSet;
 import java.util.StringJoiner;
 
-public class AltaListPokemon extends vistasPokemon {
+public class AltaListPokemon extends vistasPokemon implements IInterfacesGraficas {
 
     private LinkedHashSet<Pokemon> pokemons;
 

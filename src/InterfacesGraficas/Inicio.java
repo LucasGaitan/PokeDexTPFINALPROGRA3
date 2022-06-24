@@ -6,6 +6,7 @@ import Entidad.app.Usuario;
 import Exception.app.EDatosVacios;
 import Exception.app.EUsuarioExiste;
 import Exception.app.EUsuarioPassIncorrecta;
+import Interfaces.app.IInterfacesGraficas;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,7 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Inicio { //Ventana inicial donde se realiza el logIn o signUp de los usuarios. Acá seteamos el stage y el usuario logueado para utilizar en el resto del sistema
+public class Inicio implements IInterfacesGraficas { //Ventana inicial donde se realiza el logIn o signUp de los usuarios. Acá seteamos el stage y el usuario logueado para utilizar en el resto del sistema
 
     private Stage thisStage;
 
@@ -69,7 +70,7 @@ public class Inicio { //Ventana inicial donde se realiza el logIn o signUp de lo
     }
 
     @FXML
-    private void initialize() { //inicializo los eventos
+    public void initialize() { //inicializo los eventos
         button.setOnAction(this::userLogIn);
         button2.setOnAction(this::userSignUp);
 
