@@ -33,11 +33,11 @@ public class AltaListPokemon extends vistasPokemon {
         super.initialize(getAplicacion().getListaDePokemon());
         this.pokemons=getAplicacion().getListaDePokemon();
         super.seleccionListView(pokemons);
-        cargarLista();
+        cargarListaPokemons();
         capturarPokemon.setOnAction(event -> altaPokemon());
     }
 
-    public void cargarLista(){ //cargo la lista con todos los pokemones de la 1ra generacion
+    public void cargarListaPokemons(){ //cargo la lista con todos los pokemones de la 1ra generacion
         for (Pokemon p : this.pokemons) {
             getListPokemon().getItems().add(p.getName());
         }

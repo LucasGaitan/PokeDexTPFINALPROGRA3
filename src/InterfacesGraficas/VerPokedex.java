@@ -38,19 +38,18 @@ public class VerPokedex extends vistasPokemon{
     @FXML
     public void initialize() { //inicializo los eventos con sus excepciones elevadas
         super.initialize(pokemons);
-        cargarLista();
+        cargarListaPokedex();
         super.seleccionListView(pokemons);
         borrarPokemon.setOnAction(event -> {borrarPokemon();
-        cargarLista();});
+        cargarListaPokedex();});
     }
 
     public void borrarPokemon(){ //borra el pokemon seleccionado de la pokedex
         getInicio().getEncontrado().getPokedex().borrar(getSeleccionado());
-        cargarLista();
         setEventoLabel("Pokémon eliminado con éxito!");
     }
 
-    public void cargarLista() { ///carga la pokedex del usuario
+    public void cargarListaPokedex() { ///carga la pokedex del usuario
         this.pokemons = getInicio().getEncontrado().getPokedex().listar();
         ArrayList<String> lista = new ArrayList<>();
         for (Pokemon p : pokemons) {
