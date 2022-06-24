@@ -14,115 +14,39 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.util.LinkedHashSet;
 import java.util.StringJoiner;
 
-public class AltaListPokemon {
-
-    private final Stage thisStage;
-    private  Inicio inicio;
-    private Pokemon seleccionado;
-    Aplicacion aplicacion;
-
-    @FXML
-    private Label usuario;
-
-    @FXML
-    private ImageView urlPokemon;
-
-    @FXML
-    private ListView<String> listPokemon;
-
-    @FXML
-    private Label tipoPokemon;
-
-    @FXML
-    private Label idPokemon;
-
-    @FXML
-    private Label habilidadPokemon;
-
-    @FXML
-    private Button atras;
+public class AltaListPokemon extends vistasPokemon {
 
     @FXML
     private Button capturarPokemon;
 
+
+    private LinkedHashSet<Pokemon> pokemons;
+
     public AltaListPokemon(Inicio inicio){
-        this.aplicacion = inicio.getAplicacion();
-        thisStage = inicio.getThisStage();
-        this.inicio = inicio;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("InterfacesGraficas/AltaListPokemon.fxml"));
-
-            loader.setController(this);
-
-            thisStage.setScene(new Scene(loader.load()));
-
-            thisStage.setTitle("Agregar | Borrar Pokemon a Pokedex");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showStage() {
-        thisStage.show();
-    }
-
-    public void irAtras(){
-        PrincipalUser principalUser = new PrincipalUser(inicio);
-        principalUser.showStage();
+        super(inicio,"InterfacesGraficas/AltaListPokemon.fxml","Listar | Capturar Pokemon");
     }
 
     @FXML
-    private void initialize(){
-        usuario.setText(inicio.getEncontrado().getUserName());
-        atras.setOnAction(event -> irAtras());
-        capturarPokemon.setOnAction(event -> altaPokemon());
+    public void initialize(){ //inicializo los eventos
+        super.initialize(getAplicacion().getListaDePokemon());
+        this.pokemons=getAplicacion().getListaDePokemon();
+        super.seleccionListView(pokemons);
         cargarLista();
-        listPokemon.setOnMouseClicked(mouseEvent -> seleccionListView());
-    }
-    public void cargarLista(){
-
-        for (Pokemon p : aplicacion.getListaDePokemon()) {
-            listPokemon.getItems().add(p.getName());
-        }
-
-    }
-    public void seleccionListView() {
-        String nombre = listPokemon.getSelectionModel().getSelectedItem();
-        //buscarlo desde pokedex
-        Pokemon seleccionado = new Pokemon();
-        for (Pokemon p : aplicacion.getListaDePokemon()){
-            if (p.getName().equals(nombre)){
-                seleccionado=p;
-            }
-        }
-        this.seleccionado = seleccionado;
-        setPokemonUi();
-    }
-    public void setPokemonUi ()
-    {
-        Image image = new Image(seleccionado.getSprite(), 1000, 1000, true, true);
-        urlPokemon.setImage(image);
-        urlPokemon.setPreserveRatio(true);
-        idPokemon.setText(String.valueOf(seleccionado.getId()));
-
-        StringJoiner tipos = new StringJoiner("/");
-        for (String recorrer : seleccionado.getType()){
-            tipos.add(recorrer);
-        }
-        tipoPokemon.setText(tipos.toString());
-
-        StringJoiner habilidades = new StringJoiner("/");
-        for (String recorrer : seleccionado.getAbilities()){
-            habilidades.add(recorrer);
-        }
-        habilidadPokemon.setText(habilidades.toString());
+        capturarPokemon.setOnAction(event -> altaPokemon());
     }
 
-    public void altaPokemon (){
-        inicio.getEncontrado().getPokedex().agregar(seleccionado);
+    public void cargarLista(){ //cargo la lista con todos los pokemones de la 1ra generacion
+        for (Pokemon p : this.pokemons) {
+            getListPokemon().getItems().add(p.getName());
+        }
+    }
+
+    public void altaPokemon (){ //capturo el pokemon a la pokedex del usuario activo
+        getInicio().getEncontrado().getPokedex().agregar(getSeleccionado());
+        setEventoLabel("Capturado con éxito!");
     }
 
 }

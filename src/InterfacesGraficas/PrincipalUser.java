@@ -28,7 +28,7 @@ public class PrincipalUser{
     @FXML
     private Button altaListPokemon;
 
-    public PrincipalUser(Inicio inicio){
+    public PrincipalUser(Inicio inicio){  //inicializo la ventana PrincipalUser
         this.aplicacion = inicio.getAplicacion();
         thisStage = inicio.getThisStage();
         this.inicio = inicio;
@@ -50,23 +50,23 @@ public class PrincipalUser{
         thisStage.show();
     }
 
-    public void userLogOut(){
+    public void userLogOut(){ ///metodo que cierra la sesion y abre la pantalla de logIn
         Inicio logOut = new Inicio(aplicacion, thisStage);
         logOut.showStage();
     }
 
-    public void openVerPokedex() {
+    public void openVerPokedex() { ///metodo que abre la pokedex
         VerPokedex verPokedex = new VerPokedex(inicio);
         verPokedex.showStage();
     }
 
-    public void openABPokemon() {
+    public void openABPokemon() { ///metodo que abre la lista de pokemones para agregar a la pokedex
         AltaListPokemon altaListPokemon = new AltaListPokemon(inicio);
         altaListPokemon.showStage();
     }
 
     @FXML
-    private void initialize(){
+    private void initialize(){ ///inicializo los eventos
         usuario.setText(inicio.getEncontrado().getUserName());
         logOut.setOnAction(event -> userLogOut());
         verPokedex.setOnAction(event -> openVerPokedex());

@@ -2,30 +2,29 @@ package Controladores.app;
 
 import Entidad.app.Usuario;
 import Exception.app.EDatosVacios;
-import Exception.app.ENotFoundException;
 import Exception.app.EUsuarioExiste;
 import Exception.app.EUsuarioPassIncorrecta;
 import Interfaces.app.IAbm;
 import Entidad.app.Pokedex;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class ControladoraUsuario implements IAbm<Usuario> {
     HashMap<String, Usuario> usuarios;
-
+    //constructor controladora de usuario para obtener hashmap desde aplicacion
     public ControladoraUsuario(HashMap<String, Usuario> usuarioHashMap) {
         this.usuarios = usuarioHashMap;
     }
 
+    ///agrego un elemento al hashmap
     @Override
-    public void agregar(Usuario elemento) throws EUsuarioExiste, EDatosVacios {
-        if (elemento.getUserName().equals("") || elemento.getPassword().equals("")) {
+    public void agregar(Usuario elemento) throws EUsuarioExiste, EDatosVacios { ///elevo la excepcion
+        if (elemento.getUserName().equals("") || elemento.getPassword().equals("")) { ///si se recibe un usuario con username o contraseña vacio se lanza exception
             throw new EDatosVacios("Por favor, ingrese sus datos");
-        } else if (usuarios.containsKey(elemento.getUserName())) {
+        } else if (usuarios.containsKey(elemento.getUserName())) { ///si ya existe el username en el sistema se lanza excepcion
             throw new EUsuarioExiste("El usuario ya existe en el sistema");
         } else {
-            usuarios.put(elemento.getUserName(), elemento);
+            usuarios.put(elemento.getUserName(), elemento); ///se agrega usuario al hashmap
         }
 
 
@@ -63,13 +62,6 @@ public class ControladoraUsuario implements IAbm<Usuario> {
         return encontrado;
     }
 
-    public String mostrarInfoUsuarioAdmin(String username) {
-        return encontrarUsuario(username).toString();
-    }
-
-    public String mostrarInfoUsuarioUser(String username) {
-        return encontrarUsuario(username).toStringUser();
-    }
 
     public Usuario login(String username, String password) throws EUsuarioPassIncorrecta {
         Usuario encontrado = encontrarUsuario(username);
@@ -84,26 +76,6 @@ public class ControladoraUsuario implements IAbm<Usuario> {
         return encontrado;
     }
 
-    String borrarUsuarioLista(Usuario elemento) throws ENotFoundException {
-        boolean found = false;
-        Iterator<Map.Entry<String, Usuario>> iterator = usuarios.entrySet().iterator();
-        Usuario aBorrar = new Usuario();
-        String response = new String();
-        while (iterator.hasNext() && !found) {
-            Map.Entry<String, Usuario> entradaMapa = iterator.next();
-            if (entradaMapa.getKey().equals(elemento.getUserName())) {
-                aBorrar = entradaMapa.getValue();
-                found = true;
-            }
-        }
-        if (usuarios.containsKey(aBorrar.getUserName())) {
-            usuarios.remove(aBorrar.getUserName());
-
-        } else {
-            throw new ENotFoundException("El usuario no existe");
-        }
-        return response;
-    }
 
     public Usuario crearUsuario(String username, String password) {
         Usuario usuario = new Usuario(getCurrentId() + 1, username, password, false, new Pokedex());
@@ -132,6 +104,11 @@ public class ControladoraUsuario implements IAbm<Usuario> {
         return lista;
     }
 
+    public void loadAdminInicio(){
+        if (usuarios.isEmpty()){
+            usuarios.put(loadAdmin().getUserName(),loadAdmin());
+        }
+    }
 
     public Usuario loadAdmin() {
         Usuario user = new Usuario(1, "admin", "admin", true, new Pokedex());

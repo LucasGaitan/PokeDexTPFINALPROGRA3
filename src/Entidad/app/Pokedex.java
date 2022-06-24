@@ -32,10 +32,12 @@ public class Pokedex implements Serializable {
     public ArrayList<Pokemon> listar() {
         return pokedex;
     }
+
     public void limpiarPokedex ()
     {
         this.pokedex.clear();
     }
+
 }
 
 

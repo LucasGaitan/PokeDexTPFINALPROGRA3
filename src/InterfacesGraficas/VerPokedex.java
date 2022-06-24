@@ -18,127 +18,44 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.StringJoiner;
 
-public class VerPokedex {
-
-    private final Stage thisStage;
-    private  Inicio inicio;
-    private ArrayList<Pokemon> pokemons;
-    private Aplicacion aplicacion;
-    private Pokemon seleccionado;
-
-    @FXML
-    private Label usuario;
-
-    @FXML
-    private ImageView urlPokemon;
-
-    @FXML
-    private ListView<String> listPokemon;
-
-    @FXML
-    private Label tipoPokemon;
-
-    @FXML
-    private Label idPokemon;
-
-    @FXML
-    private Label habilidadPokemon;
-
-    @FXML
-    private Button atras;
+public class VerPokedex extends vistasPokemon{
 
     @FXML
     private Button borrarPokemon;
 
-    public VerPokedex(Inicio inicio) {
-        this.aplicacion = inicio.getAplicacion();
-        thisStage = inicio.getThisStage();
-        this.inicio = inicio;
-        this.pokemons = new ArrayList<>();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("InterfacesGraficas/VerPokedex.fxml"));
+    private ArrayList<Pokemon> pokemons;
 
-            loader.setController(this);
+    public VerPokedex(Inicio inicio) { ///inicializo la ventana
+        super(inicio, "InterfacesGraficas/VerPokedex.fxml", "Pokedex");
 
-            thisStage.setScene(new Scene(loader.load()));
-
-            thisStage.setTitle("Pokedex");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showStage() {
-        thisStage.show();
-    }
-
-    public void irAtras() {
-        PrincipalUser principalUser = new PrincipalUser(inicio);
-        principalUser.showStage();
     }
 
     @FXML
-    private void initialize() {
-        usuario.setText(inicio.getEncontrado().getUserName());
-        atras.setOnAction(event -> irAtras());
+    public void initialize() { //inicializo los eventos con sus excepciones elevadas
+        super.initialize(pokemons);
         cargarLista();
-        listPokemon.setOnMouseClicked(mouseEvent -> seleccionListView());
+        super.seleccionListView(pokemons);
         borrarPokemon.setOnAction(event -> {borrarPokemon();
         cargarLista();});
     }
 
-    public void cargarLista(){
-        pokemons = inicio.getEncontrado().getPokedex().listar();
-        ArrayList <String> lista=new ArrayList<>();
+    public void borrarPokemon(){ //borra el pokemon seleccionado de la pokedex
+        getInicio().getEncontrado().getPokedex().borrar(getSeleccionado());
+        cargarLista();
+        setEventoLabel("Pokémon eliminado con éxito!");
+    }
+
+    public void cargarLista() { ///carga la pokedex del usuario
+        this.pokemons = getInicio().getEncontrado().getPokedex().listar();
+        ArrayList<String> lista = new ArrayList<>();
         for (Pokemon p : pokemons) {
             lista.add(p.getName());
-            //listPokemon.getItems().add(p.getName());
         }
-        ObservableList<String> observableList = FXCollections.observableArrayList(lista);
-        listPokemon.setItems(observableList);
-
-
-    }
-    public void seleccionListView() {
-        String nombre = listPokemon.getSelectionModel().getSelectedItem();
-        Pokemon seleccionado=new Pokemon();
-        for (Pokemon p : pokemons){
-            if (p.getName().equals(nombre)){
-                seleccionado=p;
-            }
-        }
-        if (nombre!=null && !pokemons.isEmpty() )
-        {
-            this.seleccionado = seleccionado;
-            setPokedexUi();
-        }
-    }
-    public void setPokedexUi ()
-    {
-        Image image = new Image(seleccionado.getSprite(), 1000, 1000, true, true);
-        urlPokemon.setImage(image);
-        urlPokemon.setPreserveRatio(true);
-        idPokemon.setText(String.valueOf(seleccionado.getId()));
-
-        StringJoiner tipos = new StringJoiner("/");
-        for (String recorrer : seleccionado.getType()){
-            tipos.add(recorrer);
-        }
-        tipoPokemon.setText(tipos.toString());
-
-        StringJoiner habilidades = new StringJoiner("/");
-        for (String recorrer : seleccionado.getAbilities()){
-            habilidades.add(recorrer);
-        }
-        habilidadPokemon.setText(habilidades.toString());
-    }
-
-    public void borrarPokemon(){
-        inicio.getEncontrado().getPokedex().borrar(seleccionado);
-        cargarLista();
+        ObservableList<String> observableList = FXCollections.observableArrayList(lista); ///casteo a observablelist para mostrar en listView
+        getListPokemon().setItems(observableList);
     }
 }
 

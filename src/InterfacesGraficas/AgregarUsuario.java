@@ -64,29 +64,28 @@ public class AgregarUsuario {
 
     @FXML
     private void initialize() {
-        atras.setOnMouseClicked(event -> atras());
+        atras.setOnMouseClicked(event -> irAtras());
         CrearUsuario.setOnMouseClicked(event -> agregarUsuario());
     }
 
-    public void atras() {
+    public void irAtras() {
         PrincipalAdmin PrincipalAdmin = new PrincipalAdmin(inicio);
         PrincipalAdmin.showStage();
     }
 
-    public void agregarUsuario() {
+    public void agregarUsuario() { //funcion que se invoca al hacer click en agregar usuario
         try {
-            if (usernameM.getText().trim().length() == 0 || usernameM.getText().trim().length() == 0) {
+            if (usernameM.getText().trim().length() == 0 || usernameM.getText().trim().length() == 0) { //si alguno de los campos esta vacio lanza una excepcion
                 throw new EDatosVacios("Por favor ingrese todos los datos");
             }
-            ControladoraUsuario controller = aplicacion.getControladoraUsuario();
-            nuevo = controller.crearUsuarioAdmin(usernameM.getText(), passwordM.getText(), adminM.isSelected());
+            ControladoraUsuario controller = aplicacion.getControladoraUsuario(); //instancio una controladora de usuario para agregar a la lista el nuevo usuario
+            nuevo = controller.crearUsuarioAdmin(usernameM.getText(), passwordM.getText(), adminM.isSelected()); //creo el usuario apartir de los datos de la interfaz grafica
 
 
-            controller.agregar(nuevo);
-            PrincipalAdmin principalAdmin = new PrincipalAdmin(inicio);
-            principalAdmin.showStage();
+            controller.agregar(nuevo); //agrego el usuario
+            irAtras(); //vuelvo a principalAdmin
 
-        } catch (EDatosVacios | EUsuarioExiste ex) {
+        } catch (EDatosVacios | EUsuarioExiste ex) { //atrapo las exepciones y muestro por pantalla el mensaje
             errorLabel.setText(ex.getMessage());
         }
     }

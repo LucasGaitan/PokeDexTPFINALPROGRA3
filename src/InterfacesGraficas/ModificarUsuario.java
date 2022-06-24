@@ -44,7 +44,7 @@ public class ModificarUsuario {
 
     private final Usuario seleccionado;
 
-    public ModificarUsuario(Inicio inicio, Usuario seleccionado) {
+    public ModificarUsuario(Inicio inicio, Usuario seleccionado) { //inicializo la ventana
         this.seleccionado = seleccionado;
         thisStage = inicio.getThisStage();
         this.aplicacion = inicio.getAplicacion();
@@ -68,19 +68,20 @@ public class ModificarUsuario {
     }
 
     @FXML
-    public void initialize() {
+    public void initialize() { ///inicializo los eventos con las funciones elevadas
         atras.setOnAction(event -> irAtras());
-        modificarUsuario.setOnAction(event -> modificarUsuario(seleccionado));
+        modificarUsuario.setOnAction(event -> {modificarUsuario(seleccionado);
+            irAtras();});
         usuario.setText(seleccionado.getUserName());
         cargarDatos(seleccionado);
     }
 
-    public void irAtras() {
+    public void irAtras() { ///metodo para volver a PrincipalAdmin
         PrincipalAdmin principalAdmin = new PrincipalAdmin(inicio);
         principalAdmin.showStage();
     }
 
-    public void cargarDatos(Usuario usuario) {
+    public void cargarDatos(Usuario usuario) { ///cargo los datos en la interfaz grafica del usuario
         passwordM.setText(usuario.getPassword());
         if (usuario.isAdmin()) {
             adminM.setSelected(true);
@@ -89,11 +90,11 @@ public class ModificarUsuario {
         }
     }
 
-    public void modificarUsuario(Usuario usuario) {
+    public void modificarUsuario(Usuario usuario) { ///realizo las validaciones necesarias para modificar el usario
         try {
-            if (passwordM.getText().trim().length() == 0) {
+            if (passwordM.getText().trim().length() == 0) { ///si la contraseña esta vacia lanzo una excepcion
                 throw new EDatosVacios("Se debe ingresar una contraseña");
-            } else {
+            } else { //guardo el usuario modificado en el hashmap
                 usuario.setPassword(passwordM.getText());
                 if (adminM.isSelected()) {
                     usuario.setAdmin(true);
@@ -106,8 +107,6 @@ public class ModificarUsuario {
                 }
                 ControladoraUsuario controller = aplicacion.getControladoraUsuario();
                 controller.modificar(usuario);
-                PrincipalAdmin principalAdmin = new PrincipalAdmin(inicio);
-                principalAdmin.showStage();
             }
         }catch (EDatosVacios ex)
         {

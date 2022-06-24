@@ -36,6 +36,7 @@ public class Aplicacion {
         this.listaDePokemon = controladoraJSON.generarPokemon();
         this.controladoraPokemon = new ControladoraPokemon(listaDePokemon);
         controladoraUsuario.setUsuarios(controladoraArchivoUsuarios.agregarFiletoHashMap(new File("usuarios.bin")));
+        controladoraUsuario.loadAdminInicio();
     }
 
     public LinkedHashSet<Pokemon> getListaDePokemon() {

@@ -11,13 +11,12 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="349.0" prefWidth="572.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="349.0" prefWidth="572.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
-            <TableView fx:id="table" layoutY="1.0" prefHeight="349.0" prefWidth="390.0">
+            <TableView fx:id="table" layoutY="1.0" prefHeight="349.0" prefWidth="388.0">
                <columns>
                   <TableColumn fx:id="IdColumn" prefWidth="53.0" text="Id" />
-                  <TableColumn fx:id="UsernameColumn" prefWidth="97.0" text="Username" />
-                  <TableColumn fx:id="PasswordColumn" prefWidth="75.0" text="Password" />
-                  <TableColumn fx:id="AdminColumn" prefWidth="75.0" text="Admin" />
-                  <TableColumn fx:id="NPokemonColumn" prefWidth="88.0" text="N° Pokemon" />
+                  <TableColumn fx:id="UsernameColumn" prefWidth="144.0" text="Username" />
+                  <TableColumn fx:id="PasswordColumn" prefWidth="95.0" text="Password" />
+                  <TableColumn fx:id="AdminColumn" prefWidth="95.0" text="Admin" />
                </columns>
             </TableView>
          <Button fx:id="logOut" layoutX="452.0" layoutY="310.0" mnemonicParsing="false" text="Log Out" />

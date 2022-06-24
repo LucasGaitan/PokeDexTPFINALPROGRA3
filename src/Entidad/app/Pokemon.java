@@ -59,37 +59,6 @@ public class Pokemon implements Serializable {
         return sprite;
     }
 
-    public int generarId()
-    {
-        int id=1;
-        return id;
-    }
-
-    public void cargarTipos(String tipo)
-    {
-
-        this.type.add(tipo);
-    }
-
-    public void cargarTipos(Pokemon p, String tipo1, String tipo2)
-    {
-        p.type.add(tipo1);
-        p.type.add(tipo2);
-    }
-
-    public void cargarHabilidades(Pokemon p, String habilidad)
-    {
-        p.type.add(habilidad);
-    }
-
-    public void cargarHabilidades(Pokemon p, String habilidad1, String habilidad2, String habilidad3, String habilidad4)
-    {
-        p.type.add(habilidad1);
-        p.type.add(habilidad2);
-        p.type.add(habilidad3);
-        p.type.add(habilidad4);
-    }
-
     @Override
     public String toString() {
         return "Pokemon{" +

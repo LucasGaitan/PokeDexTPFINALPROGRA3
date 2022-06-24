@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -37,7 +38,7 @@ public class Inicio {
 
 
 
-    public Inicio(Aplicacion aplicacion, Stage stage) {
+    public Inicio(Aplicacion aplicacion, Stage stage) { //cargo e inicializo la ventana
         thisStage = stage;
         this.aplicacion=aplicacion;
         try {
@@ -46,6 +47,8 @@ public class Inicio {
             loader.setController(this);
 
             thisStage.setResizable(false);
+
+            thisStage.getIcons().add(new Image("InterfacesGraficas/img/pokebola.png"));
 
             thisStage.setScene(new Scene(loader.load()));
 
@@ -62,13 +65,13 @@ public class Inicio {
     }
 
     @FXML
-    private void initialize() {
+    private void initialize() { //inicializo los eventos
         button.setOnAction(this::userLogIn);
         button2.setOnAction(this::userSignUp);
 
     }
 
-    public void userLogIn(ActionEvent event){
+    public void userLogIn(ActionEvent event){ //funcion para loguearse al sistema
         Usuario encontradologin = null;
         try
         {
