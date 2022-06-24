@@ -13,9 +13,12 @@ import java.io.IOException;
 
 public class PrincipalUser{
 
-    private final Stage thisStage;
-    private final Inicio inicio;
-    Aplicacion aplicacion;
+    private Stage thisStage;
+
+    private Inicio inicio;
+
+    private Aplicacion aplicacion;
+
     @FXML
     private Label usuario;
 
@@ -50,6 +53,14 @@ public class PrincipalUser{
         thisStage.show();
     }
 
+    @FXML
+    private void initialize(){ ///inicializo los eventos
+        usuario.setText(inicio.getEncontrado().getUserName());
+        logOut.setOnAction(event -> userLogOut());
+        verPokedex.setOnAction(event -> openVerPokedex());
+        altaListPokemon.setOnAction(event -> openABPokemon());
+    }
+
     public void userLogOut(){ ///metodo que cierra la sesion y abre la pantalla de logIn
         Inicio logOut = new Inicio(aplicacion, thisStage);
         logOut.showStage();
@@ -63,14 +74,6 @@ public class PrincipalUser{
     public void openABPokemon() { ///metodo que abre la lista de pokemones para agregar a la pokedex
         AltaListPokemon altaListPokemon = new AltaListPokemon(inicio);
         altaListPokemon.showStage();
-    }
-
-    @FXML
-    private void initialize(){ ///inicializo los eventos
-        usuario.setText(inicio.getEncontrado().getUserName());
-        logOut.setOnAction(event -> userLogOut());
-        verPokedex.setOnAction(event -> openVerPokedex());
-        altaListPokemon.setOnAction(event -> openABPokemon());
     }
 
 }

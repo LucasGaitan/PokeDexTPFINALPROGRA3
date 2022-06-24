@@ -20,7 +20,7 @@ public class ControladoraJSON {
         fuente = JsonUtiles.leer(archivo);
     }
 
-    public LinkedHashSet <Pokemon> generarPokemon(){
+    public LinkedHashSet <Pokemon> generarPokemon(){   //Desde el JSON de primera generación de pokémon armamos un LinkedHashSet para usarlo en el sistema.
         LinkedHashSet<Pokemon> arrayPokemon = new LinkedHashSet<>();
         try {
             JSONArray jsonArray = new JSONArray(fuente);
@@ -45,7 +45,7 @@ public class ControladoraJSON {
         return arrayPokemon;
     }
 
-    public JSONArray generarUsuarioJSON(Usuario usuario)
+    public JSONArray generarUsuarioJSON(Usuario usuario)  //Método que utiliza el admin para generar un JSON con información de un determinado usuario
     {
         JSONObject usuarioJSON= new JSONObject();
         try {

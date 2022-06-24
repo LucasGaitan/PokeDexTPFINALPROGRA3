@@ -30,10 +30,6 @@ public class ControladoraUsuario implements IAbm<Usuario> {
 
     }
 
-    public void setUsuarios(HashMap<String, Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
-
     @Override
     public Usuario borrar(Usuario elemento) {
 
@@ -46,7 +42,11 @@ public class ControladoraUsuario implements IAbm<Usuario> {
         usuarios.replace(elemento.getUserName(), elemento);
     }
 
-    public Usuario encontrarUsuario(String username) {
+    public void setUsuarios(HashMap<String, Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public Usuario encontrarUsuario(String username) { //Método que busca el usuario en el HashMap.
 
         Iterator<Map.Entry<String, Usuario>> iterator = usuarios.entrySet().iterator();
         boolean flag = false;
@@ -62,8 +62,7 @@ public class ControladoraUsuario implements IAbm<Usuario> {
         return encontrado;
     }
 
-
-    public Usuario login(String username, String password) throws EUsuarioPassIncorrecta {
+    public Usuario login(String username, String password) throws EUsuarioPassIncorrecta { //Llama a encontrar usuario y verifica que las credenciales sean correctas
         Usuario encontrado = encontrarUsuario(username);
         if (encontrado != null) {
             if (!encontrado.getUserName().equals(username) || !encontrado.getPassword().equals(password)) {
@@ -76,16 +75,17 @@ public class ControladoraUsuario implements IAbm<Usuario> {
         return encontrado;
     }
 
-
     public Usuario crearUsuario(String username, String password) {
         Usuario usuario = new Usuario(getCurrentId() + 1, username, password, false, new Pokedex());
         return usuario;
     }
+
     public Usuario crearUsuarioAdmin (String username, String password, boolean admin)
     {
         Usuario usuario = new Usuario(getCurrentId() + 1, username, password, admin, new Pokedex());
         return usuario;
     }
+
     private int getCurrentId() {
         return usuarios.size();
     }
@@ -94,7 +94,7 @@ public class ControladoraUsuario implements IAbm<Usuario> {
         return this.usuarios;
     }
 
-    public ArrayList<Usuario> castHashMapToArrayList(HashMap<String, Usuario> usuarioHashMap) {
+    public ArrayList<Usuario> castHashMapToArrayList(HashMap<String, Usuario> usuarioHashMap) { //Método utilizado para cargar la tabla de usuarios en vista ADMIN.
         ArrayList<Usuario> lista = new ArrayList<>();
         Iterator<Map.Entry<String, Usuario>> iterator = usuarios.entrySet().iterator();
         while (iterator.hasNext()) {
@@ -104,7 +104,7 @@ public class ControladoraUsuario implements IAbm<Usuario> {
         return lista;
     }
 
-    public void loadAdminInicio(){
+    public void loadAdminInicio(){ //Si no hay usuarios, cargamos como primer usuario el ADMIN
         if (usuarios.isEmpty()){
             usuarios.put(loadAdmin().getUserName(),loadAdmin());
         }

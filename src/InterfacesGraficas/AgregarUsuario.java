@@ -24,6 +24,8 @@ public class AgregarUsuario {
 
     private Inicio inicio;
 
+    private Usuario nuevo;
+
     @FXML
     private Button atras;
     @FXML
@@ -36,9 +38,6 @@ public class AgregarUsuario {
     private Label errorLabel;
     @FXML
     private CheckBox adminM;
-
-    private Usuario nuevo;
-
 
     public AgregarUsuario(Inicio inicio) {
         this.aplicacion = inicio.getAplicacion();

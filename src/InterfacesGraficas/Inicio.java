@@ -19,24 +19,28 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Inicio {
+public class Inicio { //Ventana inicial donde se realiza el logIn o signUp de los usuarios. Acá seteamos el stage y el usuario logueado para utilizar en el resto del sistema
 
-    private final Stage thisStage;
+    private Stage thisStage;
+
     private Usuario encontrado;
+
     private Aplicacion aplicacion;
+
     @FXML
     private Button button;
+
     @FXML
     private Button button2;
+
     @FXML
     private Label wrongLogIn;
+
     @FXML
     private TextField username;
+
     @FXML
     private PasswordField password;
-
-
-
 
     public Inicio(Aplicacion aplicacion, Stage stage) { //cargo e inicializo la ventana
         thisStage = stage;
@@ -93,7 +97,7 @@ public class Inicio {
 
     }
 
-    public void userSignUp(ActionEvent event){
+    public void userSignUp(ActionEvent event){ //Método que realiza el registro del usuario en el sistema
 
         Usuario elemento = aplicacion.getControladoraUsuario().crearUsuario(username.getText(),password.getText());
         boolean error = false;
@@ -109,7 +113,7 @@ public class Inicio {
         }
     }
 
-    public Usuario checkLogin() throws EUsuarioPassIncorrecta {
+    public Usuario checkLogin() throws EUsuarioPassIncorrecta { //Método que llama al login de usuario donde esta toda la logica del mismo.
         encontrado = aplicacion.getControladoraUsuario().login(this.username.getText(), this.password.getText());
         return encontrado;
     }

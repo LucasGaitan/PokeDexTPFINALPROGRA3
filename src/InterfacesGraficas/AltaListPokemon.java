@@ -19,11 +19,10 @@ import java.util.StringJoiner;
 
 public class AltaListPokemon extends vistasPokemon {
 
+    private LinkedHashSet<Pokemon> pokemons;
+
     @FXML
     private Button capturarPokemon;
-
-
-    private LinkedHashSet<Pokemon> pokemons;
 
     public AltaListPokemon(Inicio inicio){
         super(inicio,"InterfacesGraficas/AltaListPokemon.fxml","Listar | Capturar Pokemon");

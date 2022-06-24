@@ -19,10 +19,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.StringJoiner;
 
-public class vistasPokemon {
-    private final Stage thisStage;
+public class vistasPokemon {  //Se realizó esta clase para poder heredar sus atributos y métodos en las clases VerPokemon y AltaListPokemon
+    private Stage thisStage;
+
     private Inicio inicio;
+
     private Aplicacion aplicacion;
+
     private Pokemon seleccionado;
 
     @FXML
@@ -74,23 +77,23 @@ public class vistasPokemon {
         thisStage.show();
     }
 
-    public void irAtras() {
+    @FXML
+    public void initialize(Collection<Pokemon> pokemons) {
+        usuario.setText(inicio.getEncontrado().getUserName()); //Set del nombre del usuario para mostrar por pantalla
+        atras.setOnAction(event -> irAtras()); //Set del evento para ir a la ventana anterior
+        listPokemon.setOnMouseClicked(mouseEvent -> seleccionListView(pokemons)); //Set del evento para seleccionar un pokémon de la lista
+    }
+
+    public void irAtras() {  //Método que invoca button atras al ser clickeado
         PrincipalUser principalUser = new PrincipalUser(inicio);
         principalUser.showStage();
     }
 
-    @FXML
-    public void initialize(Collection<Pokemon> pokemons) {
-        usuario.setText(inicio.getEncontrado().getUserName());
-        atras.setOnAction(event -> irAtras());
-        listPokemon.setOnMouseClicked(mouseEvent -> seleccionListView(pokemons));
-    }
-
-    public void seleccionListView(Collection<Pokemon> pokemons) {
-        if (pokemons instanceof ArrayList<Pokemon>){
+    public void seleccionListView(Collection<Pokemon> pokemons) {  //Método que obtiene el pokémon seleccionado en la lista y arma la información de ese pokémon en setPokedexUi
+        if (pokemons instanceof ArrayList<Pokemon>){  //Tuvimos que usar un instanceof ya que desde VerPokedex se envia un ArrayList
             pokemons=getInicio().getEncontrado().getPokedex().listar();
         }
-        else {
+        else { // Y desde AltaListPokemon se envia un LinkedHashSet
             pokemons=aplicacion.getListaDePokemon();
         }
         String nombre = listPokemon.getSelectionModel().getSelectedItem();
@@ -100,13 +103,13 @@ public class vistasPokemon {
                 seleccionado = p;
             }
         }
-        if (nombre != null && !pokemons.isEmpty()) {
+        if (nombre != null && !pokemons.isEmpty()) {  //Solo armamos la información del pokémon si el usuario selecciona uno.
             this.seleccionado = seleccionado;
             setPokedexUi();
         }
     }
 
-    public void setPokedexUi() {
+    public void setPokedexUi() {  //Método que arma la información mostrada en la ventana sobre el pokémon seleccionado.
         Image image = new Image(seleccionado.getSprite(), 1000, 1000, true, true);
         urlPokemon.setImage(image);
         urlPokemon.setPreserveRatio(true);
@@ -141,7 +144,6 @@ public class vistasPokemon {
     public Stage getThisStage() {
         return thisStage;
     }
-
 
     public Aplicacion getAplicacion() {
         return aplicacion;

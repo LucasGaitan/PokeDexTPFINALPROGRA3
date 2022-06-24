@@ -18,9 +18,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ModificarUsuario {
-    private final Stage thisStage;
+    private Stage thisStage;
+
     private Inicio inicio;
+
     private Aplicacion aplicacion;
+
+    private Usuario seleccionado;
 
     @FXML
     private Label usuario;
@@ -42,7 +46,7 @@ public class ModificarUsuario {
     @FXML
     private Label errorLabel ;
 
-    private final Usuario seleccionado;
+
 
     public ModificarUsuario(Inicio inicio, Usuario seleccionado) { //inicializo la ventana
         this.seleccionado = seleccionado;

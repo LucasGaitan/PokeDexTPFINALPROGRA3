@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 
-public class Aplicacion {
+public class Aplicacion {  //Utilizamos una clase aplicación para poder manejar las colecciones y los controladores.
     private LinkedHashSet<Pokemon> listaDePokemon;
     private HashMap<String, Usuario> usuarios;
     private ControladoraUsuario controladoraUsuario;

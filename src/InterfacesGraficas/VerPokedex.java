@@ -23,10 +23,12 @@ import java.util.StringJoiner;
 
 public class VerPokedex extends vistasPokemon{
 
+    private ArrayList<Pokemon> pokemons;
+
     @FXML
     private Button borrarPokemon;
 
-    private ArrayList<Pokemon> pokemons;
+
 
     public VerPokedex(Inicio inicio) { ///inicializo la ventana
         super(inicio, "InterfacesGraficas/VerPokedex.fxml", "Pokedex");

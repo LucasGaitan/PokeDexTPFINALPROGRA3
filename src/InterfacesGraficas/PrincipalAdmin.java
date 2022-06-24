@@ -29,8 +29,10 @@ import java.util.HashMap;
 
 public class PrincipalAdmin {
 
-    private final Stage thisStage;
+    private Stage thisStage;
+
     private Inicio inicio;
+
     private Aplicacion aplicacion;
 
     @FXML
@@ -92,28 +94,7 @@ public class PrincipalAdmin {
 
     public void showStage() {
         thisStage.show();
-    } //metodo para mostrar este estage
-
-    public void userLogOut() { //vuelvo al menu principal
-        Inicio logOut = new Inicio(aplicacion, thisStage);
-        logOut.showStage();
-    }
-
-    @FXML
-    public void cargarTabla() { ///metodo para cargar el table view
-        ControladoraUsuario controller = aplicacion.getControladoraUsuario();
-        HashMap<String, Usuario> usuarioHashMap = controller.getHashMapUsuarios();
-        ArrayList<Usuario> usuarioArrayList = controller.castHashMapToArrayList(usuarioHashMap); //al no poder castear de hashmap a observablelist tranformo el hash en un arraylist
-
-        ObservableList<Usuario> lista = FXCollections.observableArrayList(usuarioArrayList); //declaro el obervableview y lo incializo con los valores del arraylist
-        ///asigno a cada columna del tableView los valores de cada usuario
-        IdColumn.setCellValueFactory(new PropertyValueFactory<String, Usuario>("id"));
-        UsernameColumn.setCellValueFactory(new PropertyValueFactory<String, Usuario>("userName"));
-        PasswordColumn.setCellValueFactory(new PropertyValueFactory<String, Usuario>("password"));
-        AdminColumn.setCellValueFactory(new PropertyValueFactory<String, Usuario>("admin"));
-        table.setItems(lista); ///cargo los usuarios en el tableView
-
-    }
+    } //metodo para mostrar este stage
 
     @FXML
     public void initialize() { //inicializo los eventos con las excepciones elevadas de los metodos
@@ -143,6 +124,27 @@ public class PrincipalAdmin {
         agregarUsuario.setOnMouseClicked(event -> openAgregarUsuario());
     }
 
+    @FXML
+    public void cargarTabla() { ///metodo para cargar el table view
+        ControladoraUsuario controller = aplicacion.getControladoraUsuario();
+        HashMap<String, Usuario> usuarioHashMap = controller.getHashMapUsuarios();
+        ArrayList<Usuario> usuarioArrayList = controller.castHashMapToArrayList(usuarioHashMap); //al no poder castear de hashmap a observablelist tranformo el hash en un arraylist
+
+        ObservableList<Usuario> lista = FXCollections.observableArrayList(usuarioArrayList); //declaro el obervableview y lo incializo con los valores del arraylist
+        ///asigno a cada columna del tableView los valores de cada usuario
+        IdColumn.setCellValueFactory(new PropertyValueFactory<String, Usuario>("id"));
+        UsernameColumn.setCellValueFactory(new PropertyValueFactory<String, Usuario>("userName"));
+        PasswordColumn.setCellValueFactory(new PropertyValueFactory<String, Usuario>("password"));
+        AdminColumn.setCellValueFactory(new PropertyValueFactory<String, Usuario>("admin"));
+        table.setItems(lista); ///cargo los usuarios en el tableView
+
+    }
+
+    public void userLogOut() { //vuelvo al menu principal
+        Inicio logOut = new Inicio(aplicacion, thisStage);
+        logOut.showStage();
+    }
+
     public Usuario getUsuarioSeleccionado() throws EDatosVacios { ///elevo la excepcion
         Usuario seleccionado = table.getSelectionModel().getSelectedItem(); ///tomo el objeto usuario de la fila del tableview
         if (seleccionado == null) { //si seleccione una fila vacia el valor es null
@@ -162,14 +164,10 @@ public class PrincipalAdmin {
             ControladoraUsuario controller = aplicacion.getControladoraUsuario();
             controller.borrar(seleccionado);
             cargarTabla();
-
         } else {
             throw new ENotDeleteAdmin("No se pueden eliminar administradores");
         }
-
-
     }
-
 
     public void exportarUsuarioAJson(Usuario seleccionado) {
         ControladoraJSON controladoraJSON = new ControladoraJSON();
