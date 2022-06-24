@@ -18,11 +18,6 @@ public class ControladoraUsuario implements IAbm<Usuario> {
         this.usuarios = usuarioHashMap;
     }
 
-    public void testUsuario() {
-        Usuario user = new Usuario(1, "admin", "admin", true, new Pokedex());
-        usuarios.put(user.getUserName(), user);
-    }
-
     @Override
     public void agregar(Usuario elemento) throws EUsuarioExiste, EDatosVacios {
         if (elemento.getUserName().equals("") || elemento.getPassword().equals("")) {
@@ -137,4 +132,9 @@ public class ControladoraUsuario implements IAbm<Usuario> {
         return lista;
     }
 
+
+    public Usuario loadAdmin() {
+        Usuario user = new Usuario(1, "admin", "admin", true, new Pokedex());
+        return user;
+    }
 }

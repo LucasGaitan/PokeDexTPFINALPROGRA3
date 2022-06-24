@@ -4,6 +4,8 @@ import Aplicacion.app.Aplicacion;
 import Controladores.app.ControladoraUsuario;
 import Entidad.app.Pokedex;
 import Entidad.app.Usuario;
+import Exception.app.EDatosVacios;
+import com.sun.source.tree.TryTree;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -88,30 +90,29 @@ public class ModificarUsuario {
     }
 
     public void modificarUsuario(Usuario usuario) {
-        if (passwordM.getText().trim().length()==0)
+        try {
+            if (passwordM.getText().trim().length() == 0) {
+                throw new EDatosVacios("Se debe ingresar una contraseña");
+            } else {
+                usuario.setPassword(passwordM.getText());
+                if (adminM.isSelected()) {
+                    usuario.setAdmin(true);
+                } else {
+                    usuario.setAdmin(false);
+                }
+                if (limpiarPokedex.isSelected()) {
+                    Pokedex pokedex = usuario.getPokedex();
+                    pokedex.limpiarPokedex();
+                }
+                ControladoraUsuario controller = aplicacion.getControladoraUsuario();
+                controller.modificar(usuario);
+                PrincipalAdmin principalAdmin = new PrincipalAdmin(inicio);
+                principalAdmin.showStage();
+            }
+        }catch (EDatosVacios ex)
         {
-            errorLabel.setText("Se debe ingresar una contraseña");
+            errorLabel.setText(ex.getMessage());
         }
-        else
-        {
-        usuario.setPassword(passwordM.getText());
-        if (adminM.isSelected()) {
-            usuario.setAdmin(true);
-        } else
-        {
-            usuario.setAdmin(false);
-        }
-        if (limpiarPokedex.isSelected())
-        {
-            Pokedex pokedex=usuario.getPokedex();
-            pokedex.limpiarPokedex();
-        }
-        ControladoraUsuario controller=aplicacion.getControladoraUsuario();
-        controller.modificar(usuario);
-        PrincipalAdmin principalAdmin=new PrincipalAdmin(inicio);
-        principalAdmin.showStage();
-        }
-
     }
 
 

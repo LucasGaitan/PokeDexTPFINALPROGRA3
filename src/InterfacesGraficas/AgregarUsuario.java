@@ -17,8 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AgregarUsuario
-{
+public class AgregarUsuario {
     private Aplicacion aplicacion;
 
     private Stage thisStage;
@@ -41,8 +40,7 @@ public class AgregarUsuario
     private Usuario nuevo;
 
 
-
-    public AgregarUsuario(Inicio inicio){
+    public AgregarUsuario(Inicio inicio) {
         this.aplicacion = inicio.getAplicacion();
         thisStage = inicio.getThisStage();
         this.inicio = inicio;
@@ -59,43 +57,39 @@ public class AgregarUsuario
             e.printStackTrace();
         }
     }
+
     public void showStage() {
         thisStage.show();
     }
 
     @FXML
-    private void initialize(){
+    private void initialize() {
         atras.setOnMouseClicked(event -> atras());
         CrearUsuario.setOnMouseClicked(event -> agregarUsuario());
     }
 
-    public void atras(){
+    public void atras() {
         PrincipalAdmin PrincipalAdmin = new PrincipalAdmin(inicio);
         PrincipalAdmin.showStage();
     }
-    public void agregarUsuario ()
-    {
-        if (usernameM.getText().trim().length()==0 || usernameM.getText().trim().length()==0)
-        {
-            errorLabel.setText("Completar todos los campos");
-        }
-        else
-        {
-            ControladoraUsuario controller=aplicacion.getControladoraUsuario();
-            nuevo=controller.crearUsuarioAdmin(usernameM.getText(), passwordM.getText(), adminM.isSelected());
 
-            try {
-                controller.agregar(nuevo);
-                PrincipalAdmin principalAdmin=new PrincipalAdmin(inicio);
-                principalAdmin.showStage();
-            } catch (EUsuarioExiste e) {
-                errorLabel.setText("El username ya existe, ingrese uno diferente");
-            } catch (EDatosVacios e) {
-                errorLabel.setText("Por favor ingrese todos los datos");
+    public void agregarUsuario() {
+        try {
+            if (usernameM.getText().trim().length() == 0 || usernameM.getText().trim().length() == 0) {
+                throw new EDatosVacios("Por favor ingrese todos los datos");
             }
+            ControladoraUsuario controller = aplicacion.getControladoraUsuario();
+            nuevo = controller.crearUsuarioAdmin(usernameM.getText(), passwordM.getText(), adminM.isSelected());
 
 
+            controller.agregar(nuevo);
+            PrincipalAdmin principalAdmin = new PrincipalAdmin(inicio);
+            principalAdmin.showStage();
+
+        } catch (EDatosVacios | EUsuarioExiste ex) {
+            errorLabel.setText(ex.getMessage());
         }
     }
-
 }
+
+

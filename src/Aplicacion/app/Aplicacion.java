@@ -4,8 +4,11 @@ import Controladores.app.ControladoraArchivoUsuarios;
 import Controladores.app.ControladoraJSON;
 import Controladores.app.ControladoraPokemon;
 import Controladores.app.ControladoraUsuario;
+import Entidad.app.Pokedex;
 import Entidad.app.Pokemon;
 import Entidad.app.Usuario;
+import Exception.app.EDatosVacios;
+import Exception.app.EUsuarioExiste;
 
 import java.io.File;
 import java.util.HashMap;

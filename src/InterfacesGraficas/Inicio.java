@@ -69,7 +69,6 @@ public class Inicio {
     }
 
     public void userLogIn(ActionEvent event){
-        aplicacion.getControladoraUsuario().testUsuario();
         Usuario encontradologin = null;
         try
         {

@@ -5,6 +5,7 @@ import Aplicacion.app.Aplicacion;
 import Controladores.app.ControladoraJSON;
 import Controladores.app.ControladoraUsuario;
 import Entidad.app.Usuario;
+import Exception.app.EDatosVacios;
 import JSON.app.JsonUtiles;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,11 +28,11 @@ import java.util.HashMap;
 public class PrincipalAdmin {
 
     private final Stage thisStage;
-    private  Inicio inicio;
+    private Inicio inicio;
     private Aplicacion aplicacion;
 
     @FXML
-    private TableView <Usuario> table;
+    private TableView<Usuario> table;
 
     @FXML
     private TableColumn IdColumn;
@@ -89,7 +90,7 @@ public class PrincipalAdmin {
         thisStage.show();
     }
 
-    public void userLogOut(){
+    public void userLogOut() {
         Inicio logOut = new Inicio(aplicacion, thisStage);
         logOut.showStage();
     }
@@ -116,62 +117,62 @@ public class PrincipalAdmin {
     public void initialize() {
         cargarTabla();
         logOut.setOnAction(event -> userLogOut());
-        modificarUsuario.setOnMouseClicked(event -> openModificarUsuario(getUsuarioSeleccionado()));
-        eliminarUsuario.setOnMouseClicked(event -> eliminarUsuario(getUsuarioSeleccionado()));
-        ExportarAJson.setOnMouseClicked(event -> exportarUsuarioAJson());
+        modificarUsuario.setOnMouseClicked(event -> {
+            try {
+                openModificarUsuario(getUsuarioSeleccionado());
+            } catch (EDatosVacios e) {
+                errorLabel.setText(e.getMessage());
+            }
+        });
+        eliminarUsuario.setOnMouseClicked(event -> {
+            try {
+                eliminarUsuario(getUsuarioSeleccionado());
+            } catch (EDatosVacios e) {
+                errorLabel.setText(e.getMessage());
+            }
+        });
+        ExportarAJson.setOnMouseClicked(event -> {
+            try {
+                exportarUsuarioAJson(getUsuarioSeleccionado());
+            } catch (EDatosVacios e) {
+                errorLabel.setText(e.getMessage());
+            }
+        });
         agregarUsuario.setOnMouseClicked(event -> openAgregarUsuario());
     }
 
-    public Usuario getUsuarioSeleccionado ()
-    {
+    public Usuario getUsuarioSeleccionado() throws EDatosVacios {
         Usuario seleccionado = table.getSelectionModel().getSelectedItem();
+        if (seleccionado == null) {
+            throw new EDatosVacios("No se ha seleccionado ningun usuario");
+        }
         return seleccionado;
     }
 
-    public void openModificarUsuario (Usuario seleccionado)
-    {
-            if (seleccionado!=null)
-            {
-                ModificarUsuario verModificarUsuario = new ModificarUsuario(inicio, seleccionado);
-                verModificarUsuario.showStage();
-            }
-            else
-            {
-            errorLabel.setText("No se ha seleccionado ningun usuario.");
-            }
+    public void openModificarUsuario(Usuario seleccionado) {
+        ModificarUsuario verModificarUsuario = new ModificarUsuario(inicio, seleccionado);
+        verModificarUsuario.showStage();
+
     }
-    public void eliminarUsuario (Usuario seleccionado)
-    {
-        if (seleccionado!=null)
-        {
-            ControladoraUsuario controller=aplicacion.getControladoraUsuario();
-            controller.borrar(seleccionado);
-            cargarTabla();
-        }
-        else
-        {
-            errorLabel.setText("No se ha seleccionado ningun usuario.");
-        }
+
+    public void eliminarUsuario(Usuario seleccionado) {
+
+        ControladoraUsuario controller = aplicacion.getControladoraUsuario();
+        controller.borrar(seleccionado);
+        cargarTabla();
+
+        errorLabel.setText("No se ha seleccionado ningun usuario.");
     }
 
 
-    public void exportarUsuarioAJson ()
-    {
-        Usuario seleccionado=getUsuarioSeleccionado();
-        if (seleccionado!=null)
-        {
-            ControladoraJSON controladoraJSON=new ControladoraJSON();
-            JSONArray array=controladoraJSON.generarUsuarioJSON(seleccionado);
+    public void exportarUsuarioAJson(Usuario seleccionado) {
+            ControladoraJSON controladoraJSON = new ControladoraJSON();
+            JSONArray array = controladoraJSON.generarUsuarioJSON(seleccionado);
             JsonUtiles.grabar(array);
-        }
-        else
-        {
-            errorLabel.setText("No se ha seleccionado ningun usuario.");
-        }
     }
-    public void openAgregarUsuario ()
-    {
-        AgregarUsuario agregarUsuario=new AgregarUsuario(inicio);
+
+    public void openAgregarUsuario() {
+        AgregarUsuario agregarUsuario = new AgregarUsuario(inicio);
         agregarUsuario.showStage();
     }
 
